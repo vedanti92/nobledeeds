@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Campaigns", "Pricing", "Blog"];
+const pages = ["Home", "Add Campaigns"];
 const settings = ["Account", "Logout"];
 
 function Navbar() {

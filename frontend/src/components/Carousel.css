@@ -8,6 +8,10 @@
   opacity: 1 !important;
 }
 
+.container {
+  margin-top: 80px;
+}
+
 .carousel {
   width: auto;
   max-width: 800px;

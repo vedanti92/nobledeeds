@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Carousel from "./components/Carousel";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 import "./App.css";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Carousel />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

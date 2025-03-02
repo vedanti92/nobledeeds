@@ -10,19 +10,30 @@ import { Box } from "@mui/material";
 
 export default function CampaignCard({ campaign }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} style={{ height: "26rem", width: "24rem" }}>
       <CardMedia
         sx={{ height: 160 }}
         image={campaign.image}
         title={campaign.title}
       />
       <CardContent>
-        <Typography gutterBottom variant="h6">
-          {campaign.title}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {campaign.description}
-        </Typography>
+        <div className="body" style={{height: "8rem"}}>
+          <Typography gutterBottom style={{fontSize: "18px", fontWeight: "500"}}>
+            {campaign.title}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              overflow: "hidden",
+            }}
+          >
+            {campaign.description}
+          </Typography>
+        </div>
         {/* Progress Bar for Donations */}
         <Box sx={{ mt: 2 }}>
           <LinearProgress

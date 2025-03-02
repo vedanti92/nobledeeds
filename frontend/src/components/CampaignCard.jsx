@@ -46,10 +46,10 @@ export default function CampaignCard({ campaign }) {
         </Box>
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button href={`/${campaign._id}`} size="small" variant="outlined">
+        <Button href={`/${campaign._id}`} variant="outlined">
           Show More
         </Button>
-        <Button href="/" size="small" variant="contained" color="error">
+        <Button href="/" variant="outlined" color="error">
           Donate
         </Button>
       </CardActions>

@@ -24,6 +24,12 @@ app.get("/home", async (req, res) => {
   res.json(campaigns);
 });
 
+app.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  let campaign = await Campaign.findById(id);
+  res.json(campaign);
+});
+
 app.listen(PORT, () => {
   console.log(`server listening on ${PORT}`);
   mongoose.connect(url);

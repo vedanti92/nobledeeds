@@ -17,8 +17,11 @@ export default function CampaignCard({ campaign }) {
         title={campaign.title}
       />
       <CardContent>
-        <div className="body" style={{height: "8rem"}}>
-          <Typography gutterBottom style={{fontSize: "18px", fontWeight: "500"}}>
+        <div className="body" style={{ height: "8rem" }}>
+          <Typography
+            gutterBottom
+            style={{ fontSize: "18px", fontWeight: "500" }}
+          >
             {campaign.title}
           </Typography>
           <Typography
@@ -41,7 +44,7 @@ export default function CampaignCard({ campaign }) {
             value={(campaign.raisedAmount / campaign.goalAmount) * 100}
           />
           <Typography variant="caption">
-            {campaign.raisedAmount} Amount Raised
+            ₹ {campaign.raisedAmount} Amount Raised
           </Typography>
         </Box>
       </CardContent>

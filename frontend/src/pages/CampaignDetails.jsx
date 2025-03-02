@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -23,7 +24,7 @@ function CampaignDetails() {
   }
 
   return (
-    <div className="container col-6 offset-3">
+    <div className="container col-6 offset-3 mb-5">
       <h2 className="mb-3">Campaign Details</h2>
       <img
         src={campaign.image}
@@ -50,6 +51,10 @@ function CampaignDetails() {
           ₹ {campaign.raisedAmount} Amount Raised
         </Typography>
       </Box>
+      <br />
+      <Button href="/" variant="outlined" color="error">
+        Donate
+      </Button>
     </div>
   );
 }

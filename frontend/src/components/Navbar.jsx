@@ -117,6 +117,7 @@ function Navbar() {
                   borderRadius: "100%",
                   height: "50px",
                   width: "50px",
+                  border: "none",
                 }}
               >
                 <i className="fa-solid fa-magnifying-glass"></i>

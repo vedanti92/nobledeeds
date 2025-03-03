@@ -78,25 +78,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -108,6 +90,30 @@ function Navbar() {
               </Button>
             ))}
           </Box>
+
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <div
+              className="search-bar"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                border: "2px solid black",
+                padding: "5px",
+                borderRadius: "30px",
+              }}
+            >
+              <input
+                type="text"
+                style={{ border: "none", outline: "none", paddingLeft: "10px" }}
+                placeholder="Search..."
+              />
+              <span style={{color: "black", paddingRight: "10px"}}>
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </span>
+            </div>
+          </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

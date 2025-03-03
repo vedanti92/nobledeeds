@@ -91,47 +91,38 @@ function Navbar() {
             ))}
           </Box>
 
-          <form action="/search" method="get">
-            <Box
-              sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <div
+              className="search-bar"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+              }}
             >
-              <div
-                className="search-bar"
+              <input
+                type="text"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                  padding: "5px",
-                  marginRight: "60px",
+                  border: "2px solid black",
+                  outline: "none",
+                  padding: "10px",
+                  borderRadius: "30px",
+                }}
+                placeholder="Search..."
+              />
+              <button
+                style={{
+                  backgroundColor: "skyblue",
+                  padding: "10px",
+                  borderRadius: "100%",
+                  height: "50px",
+                  width: "50px",
                 }}
               >
-                <input
-                  type="text"
-                  style={{
-                    border: "2px solid black",
-                    borderRadius: "30px",
-                    outline: "none",
-                    padding: "10px",
-                  }}
-                  placeholder="Search..."
-                />
-                <button
-                  type="submit"
-                  style={{
-                    backgroundColor: "skyblue",
-                    color: "white",
-                    padding: "10px",
-                    borderRadius: "100%",
-                    border: "none",
-                    height: "50px",
-                    width: "50px"
-                  }}
-                >
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </Box>
-          </form>
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

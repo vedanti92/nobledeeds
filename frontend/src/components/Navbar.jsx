@@ -101,23 +101,34 @@ function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   gap: "5px",
-                  border: "2px solid black",
                   padding: "5px",
-                  borderRadius: "30px",
+                  marginRight: "60px",
                 }}
               >
                 <input
                   type="text"
                   style={{
-                    border: "none",
+                    border: "2px solid black",
+                    borderRadius: "30px",
                     outline: "none",
-                    paddingLeft: "10px",
+                    padding: "10px",
                   }}
                   placeholder="Search..."
                 />
-                <span style={{ color: "black", paddingRight: "10px" }}>
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: "skyblue",
+                    color: "white",
+                    padding: "10px",
+                    borderRadius: "100%",
+                    border: "none",
+                    height: "50px",
+                    width: "50px"
+                  }}
+                >
                   <i className="fa-solid fa-magnifying-glass"></i>
-                </span>
+                </button>
               </div>
             </Box>
           </form>

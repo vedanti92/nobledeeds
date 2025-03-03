@@ -91,28 +91,36 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <div
-              className="search-bar"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                border: "2px solid black",
-                padding: "5px",
-                borderRadius: "30px",
-              }}
+          <form action="/search" method="get">
+            <Box
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
             >
-              <input
-                type="text"
-                style={{ border: "none", outline: "none", paddingLeft: "10px" }}
-                placeholder="Search..."
-              />
-              <span style={{color: "black", paddingRight: "10px"}}>
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </span>
-            </div>
-          </Box>
+              <div
+                className="search-bar"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  border: "2px solid black",
+                  padding: "5px",
+                  borderRadius: "30px",
+                }}
+              >
+                <input
+                  type="text"
+                  style={{
+                    border: "none",
+                    outline: "none",
+                    paddingLeft: "10px",
+                  }}
+                  placeholder="Search..."
+                />
+                <span style={{ color: "black", paddingRight: "10px" }}>
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </span>
+              </div>
+            </Box>
+          </form>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

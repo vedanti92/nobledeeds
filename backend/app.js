@@ -33,6 +33,10 @@ app.get("/search", async (req, res) => {
   res.json(campaigns);
 });
 
+app.get("/addCampaign", async (req, res) => {
+  res.send("Add Campaign Page");
+});
+
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
   let campaign = await Campaign.findById(id);

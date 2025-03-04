@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import CampaignDetails from "./pages/CampaignDetails";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="/:id" element={<CampaignDetails />} />
       </Routes>
     </BrowserRouter>

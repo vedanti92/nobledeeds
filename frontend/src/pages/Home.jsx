@@ -31,7 +31,7 @@ const Campaigns = () => {
         params: { category: selectedCategory },
       })
       .then((res) => setCampaigns(res.data))
-      .catch((err) => console.error("Error fetching campaigns:", err));
+      .catch((err) => console.error("Error fetching campaigns", err));
   }, []);
 
   const filteredCampaigns =

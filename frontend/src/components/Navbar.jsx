@@ -108,6 +108,7 @@ function Navbar() {
                   padding: "10px",
                   borderRadius: "30px",
                 }}
+                name="query"
                 placeholder="Search..."
               />
               <button

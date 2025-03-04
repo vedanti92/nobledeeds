@@ -12,13 +12,17 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { useNavigate } from 'react-router-dom';
 
 const pages = ["Home", "Add Campaigns"];
 const settings = ["Account", "Logout"];
 
 function Navbar() {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,6 +37,16 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Search triggered with:", searchQuery);
+    
+    if (!searchQuery.trim()) return;
+    
+    // Navigate to search results page
+    navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
   };
 
   return (
@@ -92,38 +106,36 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <div
-              className="search-bar"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-              }}
-            >
-              <input
-                type="text"
-                style={{
-                  border: "2px solid black",
-                  outline: "none",
-                  padding: "10px",
-                  borderRadius: "30px",
-                }}
-                name="query"
-                placeholder="Search..."
-              />
-              <button
-                style={{
-                  backgroundColor: "skyblue",
-                  padding: "10px",
-                  borderRadius: "100%",
-                  height: "50px",
-                  width: "50px",
-                  border: "none",
-                }}
-              >
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
+            <form onSubmit={handleSearch}>
+              <div className="search-bar" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <input
+                  type="text"
+                  style={{
+                    border: "2px solid black",
+                    outline: "none",
+                    padding: "10px",
+                    borderRadius: "30px",
+                  }}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                />
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: "skyblue",
+                    padding: "10px",
+                    borderRadius: "100%",
+                    height: "50px",
+                    width: "50px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+            </form>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

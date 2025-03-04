@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const pages = ["Home", "Add Campaigns"];
@@ -93,15 +94,16 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                {page}
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+                Home
               </Button>
-            ))}
+            </Link>
+            <Link to="/addCampaign" style={{ textDecoration: "none" }}>
+              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+                Add Campaign
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
@@ -120,7 +122,7 @@ function Navbar() {
                   }}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search..."
+                  placeholder="Search campaigns..."
                 />
                 <button
                   className="search-btn"

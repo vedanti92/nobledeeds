@@ -26,34 +26,17 @@ app.get("/home", async (req, res) => {
 
 app.get("/search", async (req, res) => {
   const { query } = req.query;
-  try {
-    const campaigns = await Campaign.find({
-      title: { $regex: query, $options: 'i' }
-    });
-    console.log("Backend search results:", campaigns); // Debug log
-    res.json(campaigns);
-  } catch (error) {
-    console.error("Backend error:", error); // Debug log
-    res.status(500).json({ error: "Search failed" });
-  }
+
+  const campaigns = await Campaign.find({
+    title: { $regex: query, $options: "i" },
+  });
+  res.json(campaigns);
 });
 
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
   let campaign = await Campaign.findById(id);
   res.json(campaign);
-});
-
-app.get("/search", async (req, res) => {
-  const { query } = req.query;
-  try {
-    const campaigns = await Campaign.find({
-      title: { $regex: query, $options: 'i' }
-    });
-    res.json(campaigns);
-  } catch (error) {
-    res.status(500).json({ error: "Search failed" });
-  }
 });
 
 app.listen(PORT, () => {

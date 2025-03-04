@@ -11,7 +11,8 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 const pages = ["Home", "Add Campaigns"];
 const settings = ["Account", "Logout"];
@@ -40,9 +41,9 @@ function Navbar() {
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("Search triggered with:", searchQuery);
-    
+
     if (!searchQuery.trim()) return;
-    
+
     // Navigate to search results page
     navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
   };
@@ -105,7 +106,10 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
             <form onSubmit={handleSearch}>
-              <div className="search-bar" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <div
+                className="search-bar"
+                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+              >
                 <input
                   type="text"
                   style={{
@@ -119,6 +123,7 @@ function Navbar() {
                   placeholder="Search..."
                 />
                 <button
+                  className="search-btn"
                   type="submit"
                   style={{
                     backgroundColor: "skyblue",

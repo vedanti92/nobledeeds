@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
-import CampaignCard from '../components/CampaignCard';
+import React from "react";
+import { useSearchParams } from "react-router-dom";
+import CampaignCard from "../components/CampaignCard";
 
 function SearchResults() {
   const [searchParams] = useSearchParams();
@@ -8,16 +8,16 @@ function SearchResults() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const query = searchParams.get('query');
+    const query = searchParams.get("query");
     if (query) {
       fetch(`http://localhost:8080/search?query=${query}`)
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           setResults(data);
           setLoading(false);
         })
-        .catch(error => {
-          console.error('Search failed:', error);
+        .catch((error) => {
+          console.error("Search failed:", error);
           setLoading(false);
         });
     }
@@ -26,13 +26,20 @@ function SearchResults() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div style={{ marginTop: '100px', padding: '20px' }}>
-      <h2>Search Results</h2>
+    <div style={{ marginTop: "100px", padding: "20px" }} className="mx-5">
+      <h2 className="mb-5">Search Results</h2>
       {results.length === 0 ? (
-        <p>No results found</p>
+        <h5 className="text-muted">No results found.</h5>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
-          {results.map(campaign => (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "auto auto auto",
+            gap: "50px",
+            justifyContent: "center",
+          }}
+        >
+          {results.map((campaign) => (
             <CampaignCard key={campaign._id} campaign={campaign} />
           ))}
         </div>
@@ -41,4 +48,4 @@ function SearchResults() {
   );
 }
 
-export default SearchResults; 
+export default SearchResults;

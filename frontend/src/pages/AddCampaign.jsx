@@ -2,8 +2,11 @@ import React from "react";
 
 function AddCampaign() {
   return (
-    <div>
-      <h1>Add Campaign</h1>
+    <div
+      className="container"
+      style={{ marginTop: "80px", marginLeft: "200px", marginRight: "200px" }}
+    >
+      <h2>Add Campaign</h2>
     </div>
   );
 }

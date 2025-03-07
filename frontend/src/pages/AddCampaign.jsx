@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@mui/material/Button";
 
 function AddCampaign() {
   return (
@@ -82,6 +83,12 @@ function AddCampaign() {
                 <option value="others">Others</option>
               </select>
             </div>
+          </div>
+
+          <div className="mt-3">
+            <Button variant="outlined" color="error">
+              Add Campaign
+            </Button>
           </div>
         </form>
       </div>

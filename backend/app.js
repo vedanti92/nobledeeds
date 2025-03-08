@@ -33,8 +33,10 @@ app.get("/search", async (req, res) => {
   res.json(campaigns);
 });
 
-app.get("/addCampaign", async (req, res) => {
-  res.send("Add Campaign Page");
+app.post("/addCampaign", async (req, res) => {
+  const newCampaign = new Campaign(req.body);
+  await newCampaign.save();
+  res.json(newCampaign);
 });
 
 app.get("/:id", async (req, res) => {

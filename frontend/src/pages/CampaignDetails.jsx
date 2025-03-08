@@ -52,9 +52,22 @@ function CampaignDetails() {
         </Typography>
       </Box>
       <br />
-      <Button href="/" variant="outlined" color="error">
-        Donate
-      </Button>
+      <div
+        className="btns"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <Button href="/" variant="outlined" color="error">
+          Donate
+        </Button>
+
+        <Button href="/:id/editCampaign" variant="outlined" color="primary">
+          Edit
+        </Button>
+      </div>
     </div>
   );
 }

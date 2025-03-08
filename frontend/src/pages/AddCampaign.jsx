@@ -1,13 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function AddCampaign() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    image: "",
+    goalAmount: "",
+    category: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // if (
+    //   !formData.title ||
+    //   !formData.description ||
+    //   !formData.image ||
+    //   !formData.goalAmount ||
+    //   !formData.category
+    // ) {
+    //   return;
+    // }
+
+    const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      e.stopPropagation();
+      form.classList.add("was-validated");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/addCampaign", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error adding campaign:", error);
+      alert("Failed to add campaign");
+    }
+  };
+
   return (
     <div className="row">
       <div className="col-3"></div>
       <div className="col-6" style={{ marginTop: "80px" }}>
         <h2>Add Campaign</h2>
-        <form action="">
+        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
@@ -16,9 +70,13 @@ function AddCampaign() {
               type="text"
               name="title"
               id="title"
+              required
               placeholder="Add a title for your campaign"
               className="form-control"
+              value={formData.title}
+              onChange={handleChange}
             />
+            <div className="invalid-feedback">Please provide a title.</div>
           </div>
 
           <div className="mb-3">
@@ -26,12 +84,17 @@ function AddCampaign() {
               Description
             </label>
             <textarea
-              type="text"
               name="description"
               id="description"
+              required
               placeholder="Add description"
               className="form-control"
+              value={formData.description}
+              onChange={handleChange}
             />
+            <div className="invalid-feedback">
+              Please provide a description.
+            </div>
           </div>
 
           <div className="mb-3">
@@ -42,9 +105,13 @@ function AddCampaign() {
               type="text"
               name="image"
               id="image"
+              required
               placeholder="Add an image URL"
               className="form-control"
+              value={formData.image}
+              onChange={handleChange}
             />
+            <div className="invalid-feedback">Please provide an image URL.</div>
           </div>
 
           <div className="row">
@@ -53,20 +120,33 @@ function AddCampaign() {
                 Goal Amount
               </label>
               <input
-                type="text"
+                type="number"
                 name="goalAmount"
                 id="goalAmount"
+                required
                 placeholder="Add total amount required"
                 className="form-control"
+                value={formData.goalAmount}
+                onChange={handleChange}
               />
+              <div className="invalid-feedback">
+                Please provide a goal amount.
+              </div>
             </div>
 
             <div className="col-6 mb-3">
               <label htmlFor="category" className="form-label">
                 Category
               </label>
-              <select name="category" id="category" className="form-control">
-                <option value="" disabled selected>
+              <select
+                name="category"
+                id="category"
+                required
+                className="form-control"
+                value={formData.category}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
                   Select a category
                 </option>
                 <option value="all">All</option>
@@ -82,11 +162,12 @@ function AddCampaign() {
                 <option value="environment">Environment</option>
                 <option value="others">Others</option>
               </select>
+              <div className="invalid-feedback">Please select a category.</div>
             </div>
           </div>
 
           <div className="mt-3">
-            <Button variant="outlined" color="error">
+            <Button type="submit" variant="outlined" color="error">
               Add Campaign
             </Button>
           </div>

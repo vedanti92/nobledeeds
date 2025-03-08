@@ -22,16 +22,6 @@ function AddCampaign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (
-    //   !formData.title ||
-    //   !formData.description ||
-    //   !formData.image ||
-    //   !formData.goalAmount ||
-    //   !formData.category
-    // ) {
-    //   return;
-    // }
-
     const form = e.currentTarget;
     if (!form.checkValidity()) {
       e.stopPropagation();

@@ -64,7 +64,7 @@ function CampaignDetails() {
           Donate
         </Button>
 
-        <Button href="/:id/editCampaign" variant="outlined" color="primary">
+        <Button href={`/editCampaign/${id}`} variant="outlined" color="primary">
           Edit
         </Button>
       </div>

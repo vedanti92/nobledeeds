@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    navigate(`/editCampaign/${id}`);
+  };
 
   useEffect(() => {
     axios
@@ -25,7 +30,39 @@ function CampaignDetails() {
 
   return (
     <div className="container col-6 offset-3 mb-5">
-      <h2 className="mb-3">Campaign Details</h2>
+      <div
+        className="row"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <h2
+          className="mb-3"
+          style={{
+            margin: "0",
+            width: "fit-content",
+          }}
+        >
+          Campaign Details
+        </h2>
+        <button
+          onClick={handleEditClick}
+          style={{
+            width: "fit-content",
+            border: "none",
+            background: "none",
+            fontSize: "22px",
+            color: "gray",
+            alignItems: "center",
+            padding: "0",
+          }}
+        >
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+      </div>
       <img
         src={campaign.image}
         alt={campaign.title}
@@ -64,8 +101,8 @@ function CampaignDetails() {
           Donate
         </Button>
 
-        <Button href={`/editCampaign/${id}`} variant="outlined" color="primary">
-          Edit
+        <Button href="" variant="outlined" color="primary">
+          Delete
         </Button>
       </div>
     </div>

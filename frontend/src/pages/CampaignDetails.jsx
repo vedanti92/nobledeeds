@@ -28,6 +28,15 @@ function CampaignDetails() {
     return <h3>Loading...</h3>;
   }
 
+  const handleDeleteClick = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/${id}`);
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting campaign:", error);
+    }
+  };
+
   return (
     <div className="container col-6 offset-3 mb-5">
       <div
@@ -101,7 +110,7 @@ function CampaignDetails() {
           Donate
         </Button>
 
-        <Button href="" variant="outlined" color="primary">
+        <Button onClick={handleDeleteClick} variant="outlined" color="primary">
           Delete
         </Button>
       </div>

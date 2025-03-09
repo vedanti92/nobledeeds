@@ -13,8 +13,10 @@
   opacity: 0.7;
 }
 
+.category:hover {
+  opacity: 1;
+}
+
 i {
   width: 20px;
-  align-items: center;
-  justify-content: center !important;
 }

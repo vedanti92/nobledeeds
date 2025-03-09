@@ -12,3 +12,9 @@
 .category {
   opacity: 0.7;
 }
+
+i {
+  width: 20px;
+  align-items: center;
+  justify-content: center !important;
+}

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./Categories.css";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 // function Categories() {
 //   return (
@@ -59,7 +64,7 @@ import { useNavigate } from "react-router-dom";
 
 function Categories() {
   const navigate = useNavigate();
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("");
 
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
@@ -68,28 +73,58 @@ function Categories() {
   };
 
   return (
-    <div>
-      <select
-        name="category"
-        id="category"
-        value={category}
-        onChange={handleCategoryChange}
-        className="form-control"
-      >
-        <option value="all">All</option>
-        <option value="disaster-relief">Disaster Relief</option>
-        <option value="food-assistance">Food Assistance</option>
-        <option value="education">Education</option>
-        <option value="animals">Animals</option>
-        <option value="children">Children</option>
-        <option value="senior-care">Senior Care</option>
-        <option value="specially-abled">Specially Abled</option>
-        <option value="medical-aid">Medical Aid</option>
-        <option value="women">Women</option>
-        <option value="environment">Environment</option>
-        <option value="others">Others</option>
-      </select>
-    </div>
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          name="category"
+          value={category}
+          label="Category"
+          onChange={handleCategoryChange}
+          className="form-control"
+          displayEmpty
+        >
+          <MenuItem value="all">
+            <i class="fa-solid fa-layer-group"></i>All
+          </MenuItem>
+          <MenuItem value="disaster-relief">
+            <i class="fa-solid fa-house-crack"></i>Disaster Relief
+          </MenuItem>
+          <MenuItem value="food-assistance">
+            <i class="fa-solid fa-utensils"></i>Food Assistance
+          </MenuItem>
+          <MenuItem value="education">
+            <i class="fa-solid fa-chalkboard-user"></i>Education
+          </MenuItem>
+          <MenuItem value="animals">
+            <i class="fa-solid fa-paw"></i>Animals
+          </MenuItem>
+          <MenuItem value="children">
+            <i class="fa-solid fa-child"></i>Children
+          </MenuItem>
+          <MenuItem value="senior-care">
+            <i class="fa-solid fa-person-cane"></i>Senior Care
+          </MenuItem>
+          <MenuItem value="specially-abled">
+            <i class="fa-solid fa-wheelchair"></i>Specially Abled
+          </MenuItem>
+          <MenuItem value="medical-aid">
+            <i class="fa-solid fa-suitcase-medical"></i>Medical Aid
+          </MenuItem>
+          <MenuItem value="women">
+            <i class="fa-solid fa-person-dress"></i>Women
+          </MenuItem>
+          <MenuItem value="environment">
+            <i class="fa-solid fa-seedling"></i>Environment
+          </MenuItem>
+          <MenuItem value="others">
+            <i class="fa-solid fa-ellipsis"></i>Others
+          </MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
 }
 

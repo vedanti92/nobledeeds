@@ -32,7 +32,7 @@ const Campaigns = () => {
       })
       .then((res) => setCampaigns(res.data))
       .catch((err) => console.error("Error fetching campaigns:", err));
-  }, []);
+  }, [selectedCategory]);
 
   const filteredCampaigns =
     category === "all"

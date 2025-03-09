@@ -1,28 +1,14 @@
-/* .categories {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-  padding: 1rem;
-  max-width: 1200px;
-  margin: 0 22rem;
-  border: 1px solid black;
-  border-radius: 10px;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control {
+  width: 300px !important;
+  height: 55px !important;
 }
 
 .category {
-  text-align: center;
   opacity: 0.7;
-  padding: 0.5rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-.category i {
-  display: block;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-} */
-
-.category:hover {
-  color: black;
 }

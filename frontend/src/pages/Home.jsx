@@ -6,12 +6,15 @@ import Carousel from "../components/Carousel";
 import Categories from "../components/Categories";
 import CampaignCard from "../components/CampaignCard";
 import { Container } from "@mui/material";
+import "./Home.css";
 
 function Home() {
   return (
     <>
       <Carousel />
-      <Categories />
+      <div className="categories-container">
+        <Categories />
+      </div>
       <Campaigns />
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -16,6 +16,10 @@ function Categories() {
     setCategory(selectedCategory);
     navigate(`/?category=${selectedCategory}`);
   };
+
+  useEffect(() => {
+    setCategory("");
+  }, []);
 
   return (
     <div className="container">

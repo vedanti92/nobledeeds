@@ -42,7 +42,9 @@ app.post("/addCampaign", async (req, res) => {
 app.put("/editCampaign/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedCampaign = await Campaign.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedCampaign = await Campaign.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     res.json(updatedCampaign);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -52,6 +54,12 @@ app.put("/editCampaign/:id", async (req, res) => {
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
   let campaign = await Campaign.findById(id);
+  res.json(campaign);
+});
+
+app.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  let campaign = await Campaign.findByIdAndDelete(id);
   res.json(campaign);
 });
 

@@ -44,7 +44,7 @@ const Campaigns = () => {
 
   return (
     <>
-      <Container sx={{ mt: 4 }}>
+      <Container sx={{ my: 4 }}>
         <Grid container spacing={3} justifyContent="center">
           {filteredCampaigns.length > 0 ? (
             filteredCampaigns.map((campaign) => (

@@ -171,13 +171,15 @@ function CampaignDetails() {
         <div className="col-1"></div>
         <div className="col-4 mt-3">
           <div className="org-details">
-            <div className="org-name">
-              <i class="fa-solid fa-building-ngo" style={{ color: "gray", fontSize: "22px" }}></i>{" "}
+            <p>Organization Name:</p>
+            <div className="org-name px-2" style={{border: "1px solid black", paddingTop: "5px", paddingBottom: "3px", borderRadius: "8px",}}>
+              <i class="fa-solid fa-building-ngo" style={{ color: "gray", fontSize: "18px" }}></i>{" "}
               &nbsp; {campaign.orgName}
             </div>
             <br />
-            <div className="org-location">
-              <i class="fa-solid fa-location-dot" style={{ color: "gray", fontSize: "22px" }}></i>{" "}
+            <p>Location:</p>
+            <div className="org-location px-2" style={{border: "1px solid black", paddingTop: "5px", paddingBottom: "3px", borderRadius: "8px",}}>
+              <i class="fa-solid fa-location-dot" style={{ color: "gray", fontSize: "18px" }}></i>{" "}
               &nbsp; {campaign.location}
             </div>
           </div>

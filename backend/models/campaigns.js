@@ -18,6 +18,16 @@ const campaignSchema = new Schema({
     required: true,
   },
 
+  orgName: {
+    type: String,
+    required: true,
+  },
+
+  location: {
+    type: String,
+    required: true,
+  },
+
   goalAmount: {
     type: Number,
     required: true,

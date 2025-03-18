@@ -38,81 +38,153 @@ function CampaignDetails() {
   };
 
   return (
-    <div className="container col-6 offset-3 mb-5">
-      <div
-        className="row"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-          alignItems: "center",
-        }}
-      >
-        <h2
-          className="mb-3"
-          style={{
-            margin: "0",
-            width: "fit-content",
-          }}
-        >
-          Campaign Details
-        </h2>
-        <button
-          onClick={handleEditClick}
-          style={{
-            width: "fit-content",
-            border: "none",
-            background: "none",
-            fontSize: "22px",
-            color: "gray",
-            alignItems: "center",
-            padding: "0",
-          }}
-        >
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-      </div>
-      <img
-        src={campaign.image}
-        alt={campaign.title}
-        style={{
-          height: "300px",
-          width: "100%",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
-        className="mb-3"
-      />
-      <h3 className="mb-3">{campaign.title}</h3>
-      <p className="mb-3">{campaign.description}</p>
-      <br />
-      <p className="mb-3">Goal Amount: ₹ {campaign.goalAmount}</p>
-      <br />
-      <Box className="mb-3">
-        <LinearProgress
-          variant="determinate"
-          value={(campaign.raisedAmount / campaign.goalAmount) * 100}
-        />
-        <Typography variant="caption">
-          ₹ {campaign.raisedAmount} Amount Raised
-        </Typography>
-      </Box>
-      <br />
-      <div
-        className="btns"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-      >
-        <Button href="/" variant="outlined" color="error">
-          Donate
-        </Button>
+    // <div className="container col-6 offset-3 mb-5">
+    //   <div
+    //     className="row"
+    //     style={{
+    //       display: "flex",
+    //       justifyContent: "space-between",
+    //       width: "100%",
+    //       alignItems: "center",
+    //     }}
+    //   >
+    //     <h2
+    //       className="mb-3"
+    //       style={{
+    //         margin: "0",
+    //         width: "fit-content",
+    //       }}
+    //     >
+    //       Campaign Details
+    //     </h2>
+    //     <button
+    //       onClick={handleEditClick}
+    //       style={{
+    //         width: "fit-content",
+    //         border: "none",
+    //         background: "none",
+    //         fontSize: "22px",
+    //         color: "gray",
+    //         alignItems: "center",
+    //         padding: "0",
+    //       }}
+    //     >
+    //       <i class="fa-solid fa-pencil"></i>
+    //     </button>
+    //   </div>
+    //   <img
+    //     src={campaign.image}
+    //     alt={campaign.title}
+    //     style={{
+    //       height: "300px",
+    //       width: "100%",
+    //       objectFit: "cover",
+    //       borderRadius: "10px",
+    //     }}
+    //     className="mb-3"
+    //   />
+    //   <h3 className="mb-3">{campaign.title}</h3>
+    //   <p className="mb-3">{campaign.description}</p>
+    //   <br />
+    //   <p className="mb-3">Goal Amount: ₹ {campaign.goalAmount}</p>
+    //   <br />
+    //   <Box className="mb-3">
+    //     <LinearProgress
+    //       variant="determinate"
+    //       value={(campaign.raisedAmount / campaign.goalAmount) * 100}
+    //     />
+    //     <Typography variant="caption">
+    //       ₹ {campaign.raisedAmount} Amount Raised
+    //     </Typography>
+    //   </Box>
+    //   <br />
+    //   <div
+    //     className="btns"
+    //     style={{
+    //       display: "flex",
+    //       justifyContent: "space-between",
+    //       width: "100%",
+    //     }}
+    //   >
+    //     <Button href="/" variant="outlined" color="error">
+    //       Donate
+    //     </Button>
 
-        <Button onClick={handleDeleteClick} variant="outlined" color="primary">
-          Delete
-        </Button>
+    //     <Button onClick={handleDeleteClick} variant="outlined" color="primary">
+    //       Delete
+    //     </Button>
+    //   </div>
+    // </div>
+
+    <div className="container col-8 mx-auto">
+      <div className="row">
+        <div className="col-7">
+          <div
+            className="row"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
+            <h2
+              className="mb-3"
+              style={{
+                margin: "0",
+                width: "fit-content",
+              }}
+            >
+              Campaign Details
+            </h2>
+            <button
+              onClick={handleEditClick}
+              style={{
+                width: "fit-content",
+                border: "none",
+                background: "none",
+                fontSize: "22px",
+                color: "gray",
+                alignItems: "center",
+                padding: "0",
+              }}
+            >
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </div>
+
+          <img
+            src={campaign.image}
+            alt={campaign.title}
+            style={{
+              height: "300px",
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: "10px",
+            }}
+            className="mb-3"
+          />
+
+          <h3 className="mb-3">{campaign.title}</h3>
+          <p className="mb-3">{campaign.description}</p>
+        </div>
+        <div className="col-1"></div>
+        <div className="col-4 mt-3">
+          <p className="mb-3">Goal Amount: ₹ {campaign.goalAmount}</p>
+          <br />
+          <Box className="mb-3">
+            <LinearProgress
+              variant="determinate"
+              value={(campaign.raisedAmount / campaign.goalAmount) * 100}
+            />
+            <Typography variant="caption">
+              ₹ {campaign.raisedAmount} Amount Raised
+            </Typography>
+          </Box>
+          <Button href="/" variant="outlined" color="error">
+            Donate
+          </Button>
+        </div>
       </div>
     </div>
   );

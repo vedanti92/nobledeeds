@@ -170,6 +170,18 @@ function CampaignDetails() {
         </div>
         <div className="col-1"></div>
         <div className="col-4 mt-3">
+          <div className="org-details">
+            <div className="org-name">
+              <i class="fa-solid fa-building-ngo" style={{ color: "gray", fontSize: "22px" }}></i>{" "}
+              &nbsp; {campaign.orgName}
+            </div>
+            <br />
+            <div className="org-location">
+              <i class="fa-solid fa-location-dot" style={{ color: "gray", fontSize: "22px" }}></i>{" "}
+              &nbsp; {campaign.location}
+            </div>
+          </div>
+          <br />
           <p className="mb-3">Goal Amount: ₹ {campaign.goalAmount}</p>
           <br />
           <Box className="mb-3">

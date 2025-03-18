@@ -141,7 +141,7 @@ function CampaignDetails() {
                   border: "none",
                   background: "none",
                   fontSize: "22px",
-                  color: "gray",
+                  color: "black",
                   alignItems: "center",
                   padding: "0",
                 }}

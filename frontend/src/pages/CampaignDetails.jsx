@@ -120,13 +120,8 @@ function CampaignDetails() {
       <div className="row">
         <div className="col-7">
           <div
-            className="row"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-              alignItems: "center",
-            }}
+            className="d-flex align-items-center justify-content-between"
+            style={{ width: "100%" }}
           >
             <h2
               className="mb-3"
@@ -137,20 +132,41 @@ function CampaignDetails() {
             >
               Campaign Details
             </h2>
-            <button
-              onClick={handleEditClick}
-              style={{
-                width: "fit-content",
-                border: "none",
-                background: "none",
-                fontSize: "22px",
-                color: "gray",
-                alignItems: "center",
-                padding: "0",
-              }}
-            >
-              <i class="fa-solid fa-pencil"></i>
-            </button>
+            <div className="dropdown">
+              <button
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style={{
+                  border: "none",
+                  background: "none",
+                  fontSize: "22px",
+                  color: "gray",
+                  alignItems: "center",
+                  padding: "0",
+                }}
+              >
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <button className="dropdown-item" onClick={handleEditClick}>
+                    <i className="fa-solid fa-pencil"></i> Edit
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item text-danger"
+                    onClick={handleDeleteClick}
+                  >
+                    <i className="fa-solid fa-trash"></i> Delete
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <img
@@ -169,17 +185,47 @@ function CampaignDetails() {
           <p className="mb-3">{campaign.description}</p>
         </div>
         <div className="col-1"></div>
-        <div className="col-4 mt-3">
+        <div
+          className="col-4 mt-3 d-flex flex-column"
+          style={{
+            border: "1px solid black",
+            borderRadius: "8px",
+            padding: "15px 20px",
+            height: "500px",
+          }}
+        >
           <div className="org-details">
             <p>Organization Name:</p>
-            <div className="org-name px-2" style={{border: "1px solid black", paddingTop: "5px", paddingBottom: "3px", borderRadius: "8px",}}>
-              <i class="fa-solid fa-building-ngo" style={{ color: "gray", fontSize: "18px" }}></i>{" "}
+            <div
+              className="org-name px-2"
+              style={{
+                border: "1px solid black",
+                paddingTop: "5px",
+                paddingBottom: "3px",
+                borderRadius: "8px",
+              }}
+            >
+              <i
+                class="fa-solid fa-building-ngo"
+                style={{ color: "gray", fontSize: "18px" }}
+              ></i>{" "}
               &nbsp; {campaign.orgName}
             </div>
             <br />
             <p>Location:</p>
-            <div className="org-location px-2" style={{border: "1px solid black", paddingTop: "5px", paddingBottom: "3px", borderRadius: "8px",}}>
-              <i class="fa-solid fa-location-dot" style={{ color: "gray", fontSize: "18px" }}></i>{" "}
+            <div
+              className="org-location px-2"
+              style={{
+                border: "1px solid black",
+                paddingTop: "5px",
+                paddingBottom: "3px",
+                borderRadius: "8px",
+              }}
+            >
+              <i
+                class="fa-solid fa-location-dot"
+                style={{ color: "gray", fontSize: "18px" }}
+              ></i>{" "}
               &nbsp; {campaign.location}
             </div>
           </div>
@@ -195,9 +241,11 @@ function CampaignDetails() {
               ₹ {campaign.raisedAmount} Amount Raised
             </Typography>
           </Box>
-          <Button href="/" variant="outlined" color="error">
-            Donate
-          </Button>
+          <div className="mt-auto">
+            <Button href="/" variant="outlined" color="error">
+              Donate
+            </Button>
+          </div>
         </div>
       </div>
     </div>

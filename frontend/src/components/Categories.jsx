@@ -24,7 +24,7 @@ function Categories() {
   return (
     <div className="container">
       <Box>
-        <FormControl>
+        <FormControl sx={{ width: 160}}>
           <InputLabel id="demo-simple-select-label">Category</InputLabel>
           <Select
             labelId="demo-simple-select-label"

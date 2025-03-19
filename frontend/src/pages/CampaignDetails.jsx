@@ -130,8 +130,8 @@ function CampaignDetails() {
               <i
                 class="fa-solid fa-building-ngo"
                 style={{ color: "gray", fontSize: "18px" }}
-              ></i>{" "}
-              &nbsp; {campaign.orgName}
+              ></i>
+              {campaign.orgName}
             </div>
             <br />
             <p>Location:</p>
@@ -147,8 +147,8 @@ function CampaignDetails() {
               <i
                 class="fa-solid fa-location-dot"
                 style={{ color: "gray", fontSize: "18px" }}
-              ></i>{" "}
-              &nbsp; {campaign.location}
+              ></i>
+              {campaign.location}
             </div>
           </div>
           <br />

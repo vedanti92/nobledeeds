@@ -136,7 +136,7 @@ function CampaignDetails() {
             <br />
             <p>Location:</p>
             <div
-              className="org-location px-2"
+              className="location px-2"
               style={{
                 border: "1px solid black",
                 paddingTop: "5px",

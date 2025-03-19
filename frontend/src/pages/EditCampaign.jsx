@@ -193,7 +193,7 @@ function EditCampaign() {
                 name="category"
                 id="category"
                 required
-                className="form-control"
+                className="form-select"
                 value={formData.category}
                 onChange={handleChange}
               >

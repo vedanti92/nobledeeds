@@ -119,6 +119,9 @@ function AddCampaign() {
                 value={formData.orgName}
                 onChange={handleChange}
               />
+              <div className="invalid-feedback">
+                Please provide organization's name.
+              </div>
             </div>
             <div className="col-6 mb-3">
               <label htmlFor="location" className="form-label">
@@ -133,6 +136,9 @@ function AddCampaign() {
                 value={formData.location}
                 onChange={handleChange}
               />
+              <div className="invalid-feedback">
+                Please provide organization's location.
+              </div>
             </div>
           </div>
 

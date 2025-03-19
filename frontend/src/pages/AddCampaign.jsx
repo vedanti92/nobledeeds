@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import "./AddCampaign.css";
 
 function AddCampaign() {
   const navigate = useNavigate();

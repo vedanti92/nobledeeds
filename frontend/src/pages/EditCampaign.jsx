@@ -130,6 +130,43 @@ function EditCampaign() {
 
           <div className="row">
             <div className="col-6 mb-3">
+              <label htmlFor="orgName" className="form-label">
+                Organization Name
+              </label>
+              <input
+                name="orgName"
+                id="orgName"
+                required
+                placeholder="Add your organization's name"
+                className="form-control"
+                value={formData.orgName}
+                onChange={handleChange}
+              />
+              <div className="invalid-feedback">
+                Please provide organization's name.
+              </div>
+            </div>
+            <div className="col-6 mb-3">
+              <label htmlFor="location" className="form-label">
+                Location
+              </label>
+              <input
+                name="location"
+                id="location"
+                required
+                placeholder="Add your organization's location"
+                className="form-control"
+                value={formData.location}
+                onChange={handleChange}
+              />
+              <div className="invalid-feedback">
+                Please provide organization's location.
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6 mb-3">
               <label htmlFor="goalAmount" className="form-label">
                 Goal Amount
               </label>

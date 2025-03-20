@@ -52,7 +52,7 @@ export default function CampaignCard({ campaign }) {
         <Button href={`/${campaign._id}`} variant="outlined">
           Show More
         </Button>
-        <Button href="/" variant="outlined" color="error">
+        <Button href={`/donate/${campaign._id}`} variant="outlined" color="error">
           Donate
         </Button>
       </CardActions>

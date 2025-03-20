@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const url = process.env.MONGO_URL;
-const PORT = 8080;
+const port = process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -88,8 +88,8 @@ app.delete("/:id", async (req, res) => {
   res.json(campaign);
 });
 
-app.listen(PORT, () => {
-  console.log(`server listening on ${PORT}`);
+app.listen(port, () => {
+  console.log(`server listening on ${port}`);
   mongoose.connect(url);
   console.log("DB connected");
 });

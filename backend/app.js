@@ -3,15 +3,20 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const app = express();
 
 const url = process.env.MONGO_URL;
 const port = process.env.PORT;
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+app.use(express.json());
 
 app.get("/home", async (req, res) => {
   const { category } = req.query;
@@ -90,6 +95,9 @@ app.delete("/:id", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`server listening on ${port}`);
-  mongoose.connect(url);
-  console.log("DB connected");
 });
+
+mongoose
+  .connect(url)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error(err));

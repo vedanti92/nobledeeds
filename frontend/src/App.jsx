@@ -6,6 +6,7 @@ import CampaignDetails from "./pages/CampaignDetails";
 import SearchResults from "./pages/SearchResults";
 import AddCampaign from "./pages/AddCampaign";
 import EditCampaign from "./pages/EditCampaign";
+import Donation from "./pages/Donation";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/addCampaign" element={<AddCampaign />} />
         <Route path="/editCampaign/:id" element={<EditCampaign />} />
+        <Route path="/donate/:id" element={<Donation />} />
         <Route path="/:id" element={<CampaignDetails />} />
       </Routes>
     </BrowserRouter>

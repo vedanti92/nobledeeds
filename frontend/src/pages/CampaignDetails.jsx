@@ -15,6 +15,10 @@ function CampaignDetails() {
     navigate(`/editCampaign/${id}`);
   };
 
+  const handleDonateClick = () => {
+    navigate(`/donate/${id}`);
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/${id}`)
@@ -164,7 +168,11 @@ function CampaignDetails() {
             </Typography>
           </Box>
           <div className="mt-auto">
-            <Button href="/" variant="outlined" color="error">
+            <Button
+              onClick={handleDonateClick}
+              variant="outlined"
+              color="error"
+            >
               Donate
             </Button>
           </div>

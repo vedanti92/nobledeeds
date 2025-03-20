@@ -51,6 +51,31 @@ app.put("/editCampaign/:id", async (req, res) => {
   }
 });
 
+app.put("/donate/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { raisedAmount } = req.body;
+
+    const campaign = await Campaign.findById(id);
+    if (!campaign) {
+      return res.status(404).json({ message: "Campaign not found" });
+    }
+
+    if (raisedAmount > campaign.goalAmount) {
+      return res.status(400).json({ message: "Donation exceeds goal amount" });
+    }
+
+    campaign.raisedAmount = raisedAmount;
+    await campaign.save();
+
+    res
+      .status(200)
+      .json({ message: "Donation updated successfully", campaign });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
   let campaign = await Campaign.findById(id);

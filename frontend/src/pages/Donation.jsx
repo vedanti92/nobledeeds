@@ -9,7 +9,7 @@ function Donation() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        marginTop: "200px",
       }}
     >
       <div
@@ -48,7 +48,12 @@ function Donation() {
             />
           </div>
           <div className="mt-auto">
-            <Button type="submit" variant="outlined" color="error" style={{width: "100%"}}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="error"
+              style={{ width: "100%" }}
+            >
               Donate
             </Button>
           </div>

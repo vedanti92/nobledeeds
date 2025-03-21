@@ -3,11 +3,15 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const authRoute = require("./routes/AuthRoute");
 
 const app = express();
 
 const url = process.env.MONGO_URL;
 const port = process.env.PORT;
+
+app.use(express.json());
 
 app.use(
   cors({
@@ -16,7 +20,9 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
+app.use(cookieParser());
+
+app.use("/", authRoute);
 
 app.get("/home", async (req, res) => {
   const { category } = req.query;

@@ -9,7 +9,7 @@ module.exports.Signup = async (req, res, next) => {
     if (existingUser) {
       return res.json({
         message:
-          "Email or Username already exists. Please use a different one.",
+          "User with same email or username already exists. Please use a different one.",
       });
     }
     const user = await User.create({ email, username, password });

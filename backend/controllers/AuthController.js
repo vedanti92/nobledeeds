@@ -39,7 +39,7 @@ module.exports.Login = async (req, res, next) => {
     }
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.json({ message: "Incorrect password or username." });
+      return res.json({ message: "Incorrect password." });
     }
     const token = createSecretToken(user._id);
     res.cookie("token", token, {

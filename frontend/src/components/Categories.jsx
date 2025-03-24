@@ -22,7 +22,7 @@ function Categories() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="categories-container">
       <Box>
         <FormControl sx={{ width: 160}}>
           <InputLabel id="demo-simple-select-label">Category</InputLabel>

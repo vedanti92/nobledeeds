@@ -128,7 +128,7 @@ function Navbar() {
                   className="search-btn"
                   type="submit"
                   style={{
-                    backgroundColor: "skyblue",
+                    backgroundColor: "#6cd4ff",
                     padding: "10px",
                     borderRadius: "100%",
                     height: "50px",

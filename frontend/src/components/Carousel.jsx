@@ -3,7 +3,7 @@ import "./Carousel.css";
 
 function Carousel() {
   return (
-    <div className="container">
+    <div className="carousel-container">
       <div
         id="carouselExampleAutoplaying"
         className="carousel slide carousel-fade mt-3"

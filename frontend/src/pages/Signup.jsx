@@ -27,7 +27,7 @@ const Signup = () => {
           <input type="password" name="password" id="password" />
         </div>
         <br />
-        <button>Signup</button>
+        <button>SIGNUP</button>
       </form>
     </div>
   );

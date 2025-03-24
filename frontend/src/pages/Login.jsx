@@ -3,25 +3,35 @@ import "./Login.css";
 
 const Login = () => {
   return (
-    <div className="container">
+    <div className="login-container">
       <form>
-        <div className="heading">
+        <div className="login-heading">
           <p>LOGIN</p>
         </div>
         <br />
         <div>
           <label htmlFor="username">Username</label>
           <br />
-          <input type="text" name="username" id="username" />
+          <input
+            className="login-input"
+            type="text"
+            name="username"
+            id="username"
+          />
         </div>
         <br />
         <div>
           <label htmlFor="password">Password</label>
           <br />
-          <input type="password" name="password" id="password" />
+          <input
+            className="login-input"
+            type="password"
+            name="password"
+            id="password"
+          />
         </div>
         <br />
-        <button>LOGIN</button>
+        <button className="login-button">LOGIN</button>
       </form>
     </div>
   );

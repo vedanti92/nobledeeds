@@ -4,9 +4,11 @@ import "./Signup.css";
 const Signup = () => {
   return (
     <div className="container">
-      <h2>Signup</h2>
-      <br />
       <form>
+        <div className="heading">
+          <p>SIGNUP</p>
+        </div>
+        <br />
         <div>
           <label htmlFor="email">Email</label>
           <br />

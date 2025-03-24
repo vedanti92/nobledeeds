@@ -6,7 +6,13 @@
   width: 350px;
   height: 400px;
   border-radius: 10px;
-  padding: 0;
+}
+
+.heading {
+  width: 100%;
+  text-align: left;
+  color: #51cafc;
+  font-weight: 700;
 }
 
 input {
@@ -31,4 +37,8 @@ button {
 
 button:hover {
   background-color: #51cafc;
+}
+
+p {
+  justify-content: left;
 }

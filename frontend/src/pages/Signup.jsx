@@ -3,31 +3,46 @@ import "./Signup.css";
 
 const Signup = () => {
   return (
-    <div className="container">
+    <div className="signup-container">
       <form>
-        <div className="heading">
+        <div className="signup-heading">
           <p>SIGNUP</p>
         </div>
         <br />
         <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input type="email" name="email" id="email" />
+          <input
+            className="signup-input"
+            type="email"
+            name="email"
+            id="email"
+          />
         </div>
         <br />
         <div>
           <label htmlFor="username">Username</label>
           <br />
-          <input type="text" name="username" id="username" />
+          <input
+            className="signup-input"
+            type="text"
+            name="username"
+            id="username"
+          />
         </div>
         <br />
         <div>
           <label htmlFor="password">Password</label>
           <br />
-          <input type="password" name="password" id="password" />
+          <input
+            className="signup-input"
+            type="password"
+            name="password"
+            id="password"
+          />
         </div>
         <br />
-        <button>SIGNUP</button>
+        <button className="signup-button">SIGNUP</button>
       </form>
     </div>
   );

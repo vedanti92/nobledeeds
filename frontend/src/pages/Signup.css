@@ -1,4 +1,4 @@
-.container {
+.signup-container {
   display: flex;
   flex-direction: column;
   margin-top: 200px;
@@ -6,16 +6,18 @@
   width: 350px;
   height: 400px;
   border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-.heading {
+.signup-heading {
   width: 100%;
   text-align: left;
   color: #51cafc;
   font-weight: 700;
 }
 
-input {
+.signup-input {
   width: 280px;
   height: 35px;
   border-radius: 5px;
@@ -25,8 +27,8 @@ input {
   outline: none;
 }
 
-button {
-  width: 100%;
+.signup-button {
+  width: 280px;
   border: none;
   background-color: #6cd4ff;
   border-radius: 5px;
@@ -35,10 +37,6 @@ button {
   color: white;
 }
 
-button:hover {
+.signup-button:hover {
   background-color: #51cafc;
-}
-
-p {
-  justify-content: left;
 }

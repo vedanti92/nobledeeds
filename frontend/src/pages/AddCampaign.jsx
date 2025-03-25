@@ -49,8 +49,7 @@ function AddCampaign() {
 
   return (
     <div className="row">
-      <div className="col-3"></div>
-      <div className="col-6" style={{ marginTop: "80px" }}>
+      <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>Add Campaign</h2>
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="mb-3">
@@ -201,7 +200,6 @@ function AddCampaign() {
           </div>
         </form>
       </div>
-      <div className="col-3"></div>
     </div>
   );
 }

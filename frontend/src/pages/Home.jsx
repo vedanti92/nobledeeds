@@ -18,7 +18,7 @@ function Home() {
   useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
-        navigate("/login");
+        navigate("/");
       }
 
       const { data } = await axios.post(
@@ -33,7 +33,7 @@ function Home() {
         ? toast(`Welcome ${user}!`, {
             position: "top-right",
           })
-        : (removeCookie("token"), navigate("/login"));
+        : (removeCookie("token"), navigate("/"));
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);

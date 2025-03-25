@@ -1,7 +1,4 @@
 import * as React from "react";
-import { useCookies } from "react-cookie"; // Import useCookies for authentication
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,34 +11,41 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+const pages = ["Home", "Add Campaigns"];
+const settings = ["Account", "Logout"];
+
 function Navbar() {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  // Check if user is logged in
-  const isLoggedIn = !!cookies.token;
-
-  // Open & close menu handlers
-  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
-  const handleCloseNavMenu = () => setAnchorElNav(null);
-  const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
-  const handleCloseUserMenu = () => setAnchorElUser(null);
-
-  // Handle logout
-  const handleLogout = () => {
-    removeCookie("token", { path: "/" }); // Remove token
-    navigate("/");
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  // Handle search
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
+    console.log("Search triggered with:", searchQuery);
+
     if (!searchQuery.trim()) return;
+
+    // Navigate to search results page
     navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
   };
 
@@ -49,16 +53,17 @@ function Navbar() {
     <AppBar position="fixed" sx={{ backgroundColor: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo */}
           <img
             src="/images/logo.png"
             style={{ width: "50px", height: "50px", borderRadius: "100%" }}
           />
 
-          {/* Responsive Menu for Small Screens */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
             >
@@ -67,31 +72,40 @@ function Navbar() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
               keepMounted
-              transformOrigin={{ vertical: "top", horizontal: "left" }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
-              <MenuItem onClick={() => navigate("/addCampaign")}>
-                Add Campaign
-              </MenuItem>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
 
-          {/* Navigation Links for Large Screens */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Button sx={{ mx: 2, color: "black" }}>Home</Button>
+              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+                Home
+              </Button>
             </Link>
             <Link to="/addCampaign" style={{ textDecoration: "none" }}>
-              <Button sx={{ mx: 2, color: "black" }}>Add Campaign</Button>
+              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+                Add Campaign
+              </Button>
             </Link>
           </Box>
 
-          {/* Search Bar */}
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
             <form onSubmit={handleSearch}>
               <div
@@ -111,8 +125,8 @@ function Navbar() {
                   placeholder="Search campaigns..."
                 />
                 <button
-                  type="submit"
                   className="search-btn"
+                  type="submit"
                   style={{
                     backgroundColor: "#6cd4ff",
                     padding: "10px",
@@ -129,7 +143,6 @@ function Navbar() {
             </form>
           </Box>
 
-          {/* User Avatar & Menu */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -140,35 +153,25 @@ function Navbar() {
               sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
               keepMounted
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {isLoggedIn ? (
-                // If user is logged in, show Account & Logout
-                <>
-                  <MenuItem onClick={() => navigate("/account")}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      Account
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleLogout}>
-                    <Typography sx={{ textAlign: "center" }}>Logout</Typography>
-                  </MenuItem>
-                </>
-              ) : (
-                // If user is not logged in, show Login & Signup
-                <>
-                  <MenuItem onClick={() => navigate("/login")}>
-                    <Typography sx={{ textAlign: "center" }}>Login</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={() => navigate("/signup")}>
-                    <Typography sx={{ textAlign: "center" }}>Signup</Typography>
-                  </MenuItem>
-                </>
-              )}
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: "center" }}>
+                    {setting}
+                  </Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
         </Toolbar>
@@ -176,5 +179,4 @@ function Navbar() {
     </AppBar>
   );
 }
-
 export default Navbar;

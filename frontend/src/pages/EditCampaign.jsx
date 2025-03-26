@@ -84,7 +84,6 @@ function EditCampaign() {
               name="title"
               id="title"
               required
-              placeholder="Add a title for your campaign"
               className="form-control"
               value={formData.title}
               onChange={handleChange}
@@ -100,7 +99,6 @@ function EditCampaign() {
               name="description"
               id="description"
               required
-              placeholder="Add description"
               className="form-control"
               value={formData.description}
               onChange={handleChange}
@@ -119,7 +117,6 @@ function EditCampaign() {
               name="image"
               id="image"
               required
-              placeholder="Add an image URL"
               className="form-control"
               value={formData.image}
               onChange={handleChange}
@@ -136,7 +133,6 @@ function EditCampaign() {
                 name="orgName"
                 id="orgName"
                 required
-                placeholder="Add your organization's name"
                 className="form-control"
                 value={formData.orgName}
                 onChange={handleChange}
@@ -153,7 +149,6 @@ function EditCampaign() {
                 name="location"
                 id="location"
                 required
-                placeholder="Add your organization's location"
                 className="form-control"
                 value={formData.location}
                 onChange={handleChange}
@@ -174,7 +169,6 @@ function EditCampaign() {
                 name="goalAmount"
                 id="goalAmount"
                 required
-                placeholder="Add total amount required"
                 className="form-control"
                 value={formData.goalAmount}
                 onChange={handleChange}

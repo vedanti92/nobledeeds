@@ -42,7 +42,7 @@ function CampaignDetails() {
   };
 
   return (
-    <div className="show-container col-8 mx-auto" style={{marginTop: "80px"}}>
+    <div className="show-container mx-auto" style={{marginTop: "80px", width: "80%"}}>
       <div className="row">
         <div className="col-7">
           <div

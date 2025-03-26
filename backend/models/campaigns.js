@@ -56,6 +56,12 @@ const campaignSchema = new Schema({
     ],
     required: true,
   },
+
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 const Campaign = mongoose.model("Campaign", campaignSchema);

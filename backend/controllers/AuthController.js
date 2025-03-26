@@ -1,6 +1,10 @@
 const User = require("../models/users");
 const { createSecretToken } = require("../utils/SecretToken");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:8080';
 
 module.exports.Signup = async (req, res, next) => {
   try {
@@ -30,32 +34,43 @@ module.exports.Signup = async (req, res, next) => {
 module.exports.Login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log("Login attempt for username:", username);
+
     if (!username || !password) {
       return res.json({ message: "All fields are required!" });
     }
+
     const user = await User.findOne({ username });
     if (!user) {
       return res.json({ message: "Incorrect password or username." });
     }
+
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
       return res.json({ message: "Incorrect password." });
     }
+
     const token = createSecretToken(user._id);
+    console.log("Token created:", token);
+
+    // Simplified cookie settings for development
     res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      secure: false,
       sameSite: "lax",
       path: "/",
-      maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days in milliseconds
+      maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days
     });
-    res
-      .status(201)
-      .json({ message: "User logged in successfully", success: true });
-    next();
+    console.log("Cookie set with token");
+
+    res.status(201).json({ 
+      message: "User logged in successfully", 
+      success: true,
+      user: user.username,
+      email: user.email,
+      token: token // Send token in response body as well
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error", success: false });
+    console.error("Login error:", error);
   }
 };

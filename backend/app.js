@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -12,12 +13,12 @@ const url = process.env.MONGO_URL;
 const port = process.env.PORT;
 
 app.use(express.json());
-
 app.use(
   cors({
     origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
+    exposedHeaders: ["set-cookie"]
   })
 );
 app.use(cookieParser());
@@ -45,9 +46,27 @@ app.get("/search", async (req, res) => {
 });
 
 app.post("/addCampaign", async (req, res) => {
-  const newCampaign = new Campaign(req.body);
-  await newCampaign.save();
-  res.json(newCampaign);
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const userId = decoded.id;
+
+    const campaignData = {
+      ...req.body,
+      userId: userId
+    };
+
+    const newCampaign = new Campaign(campaignData);
+    await newCampaign.save();
+    res.json(newCampaign);
+  } catch (error) {
+    console.error("Error creating campaign:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 app.put("/editCampaign/:id", async (req, res) => {
@@ -97,6 +116,24 @@ app.delete("/:id", async (req, res) => {
   const { id } = req.params;
   let campaign = await Campaign.findByIdAndDelete(id);
   res.json(campaign);
+});
+
+app.get("/user/campaigns", async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const userId = decoded.id;
+
+    const campaigns = await Campaign.find({ userId: userId });
+    res.json(campaigns);
+  } catch (error) {
+    console.error("Error fetching user campaigns:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 app.listen(port, () => {

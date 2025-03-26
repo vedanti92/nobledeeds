@@ -11,6 +11,8 @@ function AddCampaign() {
     image: "",
     goalAmount: "",
     category: "",
+    orgName: "",
+    location: "",
   });
 
   const handleChange = (e) => {
@@ -36,6 +38,7 @@ function AddCampaign() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(formData),
       });
       if (response.ok) {

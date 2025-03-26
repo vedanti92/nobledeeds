@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const axios = require("axios");
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = "http://localhost:8080";
 
 module.exports.Signup = async (req, res, next) => {
   try {
@@ -51,7 +51,6 @@ module.exports.Login = async (req, res, next) => {
     }
 
     const token = createSecretToken(user._id);
-    console.log("Token created:", token);
 
     // Simplified cookie settings for development
     res.cookie("token", token, {
@@ -59,16 +58,15 @@ module.exports.Login = async (req, res, next) => {
       secure: false,
       sameSite: "lax",
       path: "/",
-      maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days
+      maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     });
-    console.log("Cookie set with token");
 
-    res.status(201).json({ 
-      message: "User logged in successfully", 
+    res.status(201).json({
+      message: "User logged in successfully",
       success: true,
       user: user.username,
       email: user.email,
-      token: token // Send token in response body as well
+      token: token, // Send token in response body as well
     });
   } catch (error) {
     console.error("Login error:", error);

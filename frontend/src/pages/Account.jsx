@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Typography, Grid, Paper, Box } from "@mui/material";
+import { Container, Typography, Paper, Box } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import CampaignCard from "../components/CampaignCard";
 
 const Account = () => {
@@ -26,7 +27,7 @@ const Account = () => {
 
         setUserInfo({
           username: data.user,
-          email: data.email // Add this if you're sending email in userVerification
+          email: data.email, // Add this if you're sending email in userVerification
         });
 
         // Fetch user's campaigns

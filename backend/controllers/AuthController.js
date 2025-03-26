@@ -45,6 +45,10 @@ module.exports.Login = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days in milliseconds
     });
     res
       .status(201)
@@ -52,5 +56,6 @@ module.exports.Login = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
+    res.status(500).json({ message: "Internal server error", success: false });
   }
 };

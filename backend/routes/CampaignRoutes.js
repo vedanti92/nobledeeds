@@ -13,11 +13,10 @@ const {
 
 router.get("/home", getAllCampaigns);
 router.get("/search", searchCampaigns);
-router.post("addCampaign", createCampaign);
-router.put("editCampaign/:id", editCampaign);
+router.post("/addCampaign", createCampaign);
+router.put("/editCampaign/:id", editCampaign);
 router.put("/donate/:id", donateToCampaign);
-router.get("/:id", showCampaign);
-router.delete("/:id", deleteCampaign);
+router.route("/:id").get(showCampaign).delete(deleteCampaign);
 router.get("/user/campaigns", getUserCampaigns);
 
 module.exports = router;

@@ -61,18 +61,23 @@ module.exports.donateToCampaign = async (req, res) => {
     const { id } = req.params;
     const { raisedAmount } = req.body;
 
-    const campaign = await Campaign.findById(id);
-    if (!campaign)
-      return res.status(404).json({ message: "Campaign not found" });
-
-    if (raisedAmount > campaign.goalAmount) {
-      return res.status(400).json({ message: "Donation exceeds goal amount" });
+    if (!raisedAmount || isNaN(raisedAmount)) {
+      return res.status(400).json({ message: "Invalid donation amount" });
     }
 
-    campaign.raisedAmount = raisedAmount;
-    await campaign.save();
+    const campaign = await Campaign.findByIdAndUpdate(
+      id,
+      { $inc: { raisedAmount: raisedAmount } },
+      { new: true, runValidators: false }
+    );
+
+    if (!campaign) {
+      return res.status(404).json({ message: "Campaign not found" });
+    }
+
     res.json({ message: "Donation updated", campaign });
   } catch (error) {
+    console.error("Error processing donation:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

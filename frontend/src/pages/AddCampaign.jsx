@@ -16,10 +16,17 @@ function AddCampaign() {
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "image") {
+      setFormData({
+        ...formData,
+        image: e.target.files[0], // Store the file object
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -32,17 +39,27 @@ function AddCampaign() {
       return;
     }
 
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("goalAmount", formData.goalAmount);
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("orgName", formData.orgName);
+    formDataToSend.append("location", formData.location);
+    formDataToSend.append("image", formData.image); // Append file
+
     try {
       const response = await fetch("http://localhost:8080/addCampaign", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: formDataToSend,
         credentials: "include",
-        body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         navigate("/");
+      } else {
+        const errorMessage = await response.json();
+        alert(errorMessage.message || "Failed to add campaign");
       }
     } catch (error) {
       console.error("Error adding campaign:", error);
@@ -51,10 +68,15 @@ function AddCampaign() {
   };
 
   return (
-    <div className="row">
+    <div className="row mb-5">
       <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>Add Campaign</h2>
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="needs-validation"
+          noValidate
+          encType="multipart/form-data"
+        >
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
@@ -93,15 +115,14 @@ function AddCampaign() {
               Image
             </label>
             <input
-              type="text"
+              type="file"
               name="image"
               id="image"
               required
               className="form-control"
-              value={formData.image}
               onChange={handleChange}
             />
-            <div className="invalid-feedback">Please provide an image URL.</div>
+            <div className="invalid-feedback">Please upload an image.</div>
           </div>
 
           <div className="row">

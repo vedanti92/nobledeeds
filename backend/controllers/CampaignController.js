@@ -34,7 +34,11 @@ module.exports.createCampaign = async (req, res) => {
     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
     const userId = decoded.id;
 
-    const newCampaign = new Campaign({ ...req.body, userId });
+    const newCampaign = new Campaign({
+      ...req.body,
+      userId,
+      image: req.file.path,
+    });
     await newCampaign.save();
     res.json(newCampaign);
   } catch (error) {

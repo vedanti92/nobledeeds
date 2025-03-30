@@ -23,12 +23,14 @@ function Donation() {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent page reload
 
-    if (!donationAmount || donationAmount <= 0) {
+    const donation = parseFloat(donationAmount); // Ensure it's a number
+
+    if (!donation || donation <= 0) {
       alert("Please enter a valid donation amount.");
       return;
     }
 
-    const newRaisedAmount = campaign.raisedAmount + parseFloat(donationAmount);
+    const newRaisedAmount = campaign.raisedAmount + donation;
 
     if (newRaisedAmount > campaign.goalAmount) {
       alert("Donation exceeds goal amount! Please enter a lower amount.");
@@ -36,19 +38,24 @@ function Donation() {
     }
 
     try {
-      await axios.put(`http://localhost:8080/donate/${id}`, {
-        raisedAmount: newRaisedAmount,
-      });
+      await axios.put(
+        `http://localhost:8080/donate/${id}`,
+        { raisedAmount: donation }, // Send only the donation amount
+        { withCredentials: true } // Ensure cookies are sent
+      );
 
       alert("Donation successful! Thank you for your contribution.");
       setCampaign((prev) => ({
         ...prev,
-        raisedAmount: newRaisedAmount, // Update state before navigating
+        raisedAmount: newRaisedAmount, // Update UI
       }));
 
       navigate(`/${id}`); // Redirect after updating UI
     } catch (error) {
-      console.error("Error updating donation:", error);
+      console.error(
+        "Error updating donation:",
+        error.response?.data || error.message
+      );
       alert("Something went wrong. Please try again.");
     }
   };

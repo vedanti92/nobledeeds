@@ -1,64 +1,91 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
 function Donation() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [campaign, setCampaign] = useState(null);
   const [donationAmount, setDonationAmount] = useState("");
+  const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/${id}`)
-      .then((res) => setCampaign(res.data))
-      .catch((err) => console.error("Error fetching campaign", err));
-  }, [id]);
+    // Check authentication first
+    if (!isAuthenticated) {
+      toast.warning("Please login to make a donation");
+      navigate("/login");
+      return;
+    }
 
-  if (!campaign) {
-    return <h3>Loading...</h3>;
-  }
+    // Fetch campaign details
+    const fetchCampaign = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/${id}`);
+        setCampaign(response.data);
+      } catch (err) {
+        console.error("Error fetching campaign", err);
+        toast.error("Error fetching campaign details");
+        navigate("/");
+      }
+    };
+
+    fetchCampaign();
+  }, [id, isAuthenticated, navigate]);
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault();
 
-    const donation = parseFloat(donationAmount); // Ensure it's a number
+    if (!isAuthenticated) {
+      toast.warning("Please login to make a donation");
+      navigate("/login");
+      return;
+    }
+
+    const donation = parseFloat(donationAmount);
 
     if (!donation || donation <= 0) {
-      alert("Please enter a valid donation amount.");
+      toast.error("Please enter a valid donation amount");
       return;
     }
 
     const newRaisedAmount = campaign.raisedAmount + donation;
 
     if (newRaisedAmount > campaign.goalAmount) {
-      alert("Donation exceeds goal amount! Please enter a lower amount.");
+      toast.warning("Donation exceeds goal amount! Please enter a lower amount.");
       return;
     }
 
     try {
       await axios.put(
         `http://localhost:8080/donate/${id}`,
-        { raisedAmount: donation }, // Send only the donation amount
-        { withCredentials: true } // Ensure cookies are sent
+        { raisedAmount: donation },
+        { 
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
 
-      alert("Donation successful! Thank you for your contribution.");
-      setCampaign((prev) => ({
-        ...prev,
-        raisedAmount: newRaisedAmount, // Update UI
-      }));
-
-      navigate(`/${id}`); // Redirect after updating UI
+      toast.success("Thank you for your donation!");
+      navigate(`/${id}`);
     } catch (error) {
-      console.error(
-        "Error updating donation:",
-        error.response?.data || error.message
-      );
-      alert("Something went wrong. Please try again.");
+      console.error("Error updating donation:", error);
+      if (error.response?.status === 401) {
+        toast.error("Please login to make a donation");
+        navigate("/login");
+      } else {
+        toast.error("Failed to process donation");
+      }
     }
   };
+
+  if (!campaign) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div

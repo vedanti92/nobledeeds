@@ -31,44 +31,40 @@ module.exports.Signup = async (req, res, next) => {
   }
 };
 
-module.exports.Login = async (req, res, next) => {
+module.exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log("Login attempt for username:", username);
-
     if (!username || !password) {
-      return res.json({ message: "All fields are required!" });
+      return res.json({ success: false, message: "All fields are required!" });
     }
 
     const user = await User.findOne({ username });
     if (!user) {
-      return res.json({ message: "Incorrect password or username." });
+      return res.json({ success: false, message: "Incorrect username or password" });
     }
 
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.json({ message: "Incorrect password." });
+      return res.json({ success: false, message: "Incorrect password" });
     }
 
     const token = createSecretToken(user._id);
-
-    // Simplified cookie settings for development
+    
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
     });
 
-    res.status(201).json({
-      message: "User logged in successfully",
+    res.json({
       success: true,
-      user: user.username,
-      email: user.email,
-      token: token, // Send token in response body as well
+      message: "User logged in successfully",
+      user: user.username
     });
   } catch (error) {
     console.error("Login error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };

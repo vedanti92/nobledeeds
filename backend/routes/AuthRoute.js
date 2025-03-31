@@ -7,7 +7,7 @@ router.post("/login", Login);
 router.post("/", userVerification);
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
-    httpOnly: false,
+    httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/"

@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Typography, Paper, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import CampaignCard from "../components/CampaignCard";
+import { AuthContext } from "../context/AuthContext";
 
 const Account = () => {
+  const { isAuthenticated } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState(null);
   const [userCampaigns, setUserCampaigns] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
     const fetchUserData = async () => {
       try {
-        // Verify user authentication
         const { data } = await axios.post(
           "http://localhost:8080",
           {},
           { withCredentials: true }
         );
 
-        if (!data.status) {
-          navigate("/login");
-          return;
-        }
-
         setUserInfo({
           username: data.user,
-          email: data.email, // Add this if you're sending email in userVerification
+          email: data.email,
         });
 
-        // Fetch user's campaigns
         const campaignsResponse = await axios.get(
           `http://localhost:8080/user/campaigns`,
           { withCredentials: true }
@@ -43,7 +43,7 @@ const Account = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [isAuthenticated, navigate]);
 
   if (!userInfo) {
     return <div>Loading...</div>;

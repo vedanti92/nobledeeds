@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import Grid from "@mui/material/Grid2";
 import Carousel from "../components/Carousel";
@@ -9,34 +8,34 @@ import CampaignCard from "../components/CampaignCard";
 import { Container } from "@mui/material";
 import "./Home.css";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
 function Home() {
-  const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
+  const { isAuthenticated } = useContext(AuthContext);
   const [username, setUsername] = useState("");
+  const [hasShownWelcome, setHasShownWelcome] = useState(false);
 
   useEffect(() => {
-    const verifyCookie = async () => {
-      if (!cookies.token) {
-        navigate("/");
+    const fetchUserData = async () => {
+      if (isAuthenticated && !hasShownWelcome) {
+        try {
+          const { data } = await axios.post(
+            "http://localhost:8080/",
+            {},
+            { withCredentials: true }
+          );
+          setUsername(data.user);
+          toast.success(`Welcome back, ${data.user}!`);
+          setHasShownWelcome(true);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          toast.error("Error fetching user data");
+        }
       }
-
-      const { data } = await axios.post(
-        "http://localhost:8080",
-        {},
-        { withCredentials: true }
-      );
-
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Welcome ${user}!`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/"));
     };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+
+    fetchUserData();
+  }, [isAuthenticated]);
 
   return (
     <>

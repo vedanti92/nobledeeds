@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "./Signup.css";
+import { AuthContext } from "../context/AuthContext";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Signup = () => {
     username: "",
     password: "",
   });
+  const { signup } = useContext(AuthContext);
 
   const { email, username, password } = inputValue;
 
@@ -22,36 +23,10 @@ const Signup = () => {
     });
   };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:8080/signup",
-        {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
-
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else {
-        handleError(message);
-      }
+      await signup(email, username, password);
     } catch (error) {
       console.log(error);
     }

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "./Login.css";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const { login } = useContext(AuthContext);
 
   const { username, password } = inputValue;
 
@@ -33,32 +34,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        "http://localhost:8080/login",
-        {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
-
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else {
-        handleError(message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setInputValue({
-      ...inputValue,
-      username: "",
-      password: "",
-    });
+    await login(username, password);
   };
 
   return (

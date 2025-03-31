@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditCampaign() {
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ function EditCampaign() {
       setExistingImage(data.image);
     } catch (error) {
       console.error("Error fetching campaign:", error);
-      alert("Failed to fetch campaign details");
+      toast.error("Failed to fetch campaign details");
     }
   };
 
@@ -72,16 +74,21 @@ function EditCampaign() {
       });
 
       if (response.ok) {
+        toast.success("Campaign saved successfully");
         navigate(`/${id}`);
+      } else {
+        const errorMessage = await response.json();
+        toast.error(errorMessage.message || "Failed to save campaign");
       }
     } catch (error) {
       console.error("Error saving campaign:", error);
-      alert("Failed to save campaign");
+      toast.error("Failed to save campaign");
     }
   };
 
   return (
     <div className="row mb-5">
+      <ToastContainer />
       <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>{id ? "Edit Campaign" : "Add Campaign"}</h2>
         <form
@@ -129,7 +136,7 @@ function EditCampaign() {
                 <p>Existing Image:</p>
                 <img
                   src={existingImage}
-                  alt="Existing"
+                  alt="Existing Image"
                   style={{ width: "150px", borderRadius: "8px" }}
                 />
               </div>

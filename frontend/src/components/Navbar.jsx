@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./Navbar.css";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 const pages = ["Home", "Add Campaigns"];
 
@@ -21,6 +23,7 @@ function Navbar() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+  const { isAuthenticated, logout } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -41,27 +44,10 @@ function Navbar() {
   };
 
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
-  React.useEffect(() => {
-    const verifyAuth = async () => {
-      try {
-        const { data } = await axios.post(
-          "http://localhost:8080",
-          {},
-          { withCredentials: true }
-        );
-        setIsAuthenticated(data.status);
-      } catch (err) {
-        setIsAuthenticated(false);
-      }
-    };
-    verifyAuth();
-  }, [cookies.token]);
 
   const handleLogout = () => {
     removeCookie("token", { path: "/" });
-    setIsAuthenticated(false);
+    logout();
     navigate("/login");
   };
 

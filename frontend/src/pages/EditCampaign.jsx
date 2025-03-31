@@ -11,7 +11,11 @@ function EditCampaign() {
     image: "",
     goalAmount: "",
     category: "",
+    orgName: "",
+    location: "",
   });
+
+  const [existingImage, setExistingImage] = useState("");
 
   // Fetch existing campaign data if editing
   useEffect(() => {
@@ -24,7 +28,8 @@ function EditCampaign() {
     try {
       const response = await fetch(`http://localhost:8080/${id}`);
       const data = await response.json();
-      setFormData(data);
+      setFormData({ ...data, image: "" });
+      setExistingImage(data.image);
     } catch (error) {
       console.error("Error fetching campaign:", error);
       alert("Failed to fetch campaign details");
@@ -40,6 +45,11 @@ function EditCampaign() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const updatedData = {
+      ...formData,
+      image: formData.image || existingImage, // Keep old image if new one isn't provided
+    };
 
     const form = e.currentTarget;
     if (!form.checkValidity()) {
@@ -58,7 +68,7 @@ function EditCampaign() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedData),
       });
 
       if (response.ok) {
@@ -71,10 +81,15 @@ function EditCampaign() {
   };
 
   return (
-    <div className="row">
+    <div className="row mb-5">
       <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>{id ? "Edit Campaign" : "Add Campaign"}</h2>
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="needs-validation"
+          noValidate
+          encType="multipart/form-data"
+        >
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
@@ -109,19 +124,28 @@ function EditCampaign() {
           </div>
 
           <div className="mb-3">
+            {existingImage && (
+              <div className="mt-2">
+                <p>Existing Image:</p>
+                <img
+                  src={existingImage}
+                  alt="Existing"
+                  style={{ width: "150px", borderRadius: "8px" }}
+                />
+              </div>
+            )}
             <label htmlFor="image" className="form-label">
               Image
             </label>
             <input
-              type="text"
+              type="file"
               name="image"
               id="image"
-              required
               className="form-control"
               value={formData.image}
               onChange={handleChange}
             />
-            <div className="invalid-feedback">Please provide an image URL.</div>
+            <div className="invalid-feedback">Please upload an image.</div>
           </div>
 
           <div className="row">

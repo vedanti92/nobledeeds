@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext.jsx"; // Import AuthProvider
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -16,18 +17,20 @@ function App() {
   return (
     <CookiesProvider>
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<SearchResults />} />
-          <Route path="/addCampaign" element={<AddCampaign />} />
-          <Route path="/editCampaign/:id" element={<EditCampaign />} />
-          <Route path="/donate/:id" element={<Donation />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/:id" element={<CampaignDetails />} />
-        </Routes>
+        <AuthProvider> {/* Now inside BrowserRouter */}
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<SearchResults />} />
+            <Route path="/addCampaign" element={<AddCampaign />} />
+            <Route path="/editCampaign/:id" element={<EditCampaign />} />
+            <Route path="/donate/:id" element={<Donation />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/:id" element={<CampaignDetails />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </CookiesProvider>
   );

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import "./AddCampaign.css";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 function AddCampaign() {
+  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -14,6 +18,13 @@ function AddCampaign() {
     orgName: "",
     location: "",
   });
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.warning("Please login to create a campaign");
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     if (e.target.name === "image") {
@@ -56,14 +67,15 @@ function AddCampaign() {
       });
 
       if (response.ok) {
+        toast.success("Campaign created successfully!");
         navigate("/");
       } else {
         const errorMessage = await response.json();
-        alert(errorMessage.message || "Failed to add campaign");
+        toast.error(errorMessage.message || "Failed to add campaign");
       }
     } catch (error) {
       console.error("Error adding campaign:", error);
-      alert("Failed to add campaign");
+      toast.error("Failed to add campaign");
     }
   };
 

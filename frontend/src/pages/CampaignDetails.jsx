@@ -140,6 +140,9 @@ function CampaignDetails() {
             }}
             className="mb-3"
           />
+          <h6 style={{ color: "gray", fontStyle: "italic" }}>
+            Created by: {campaign.userId.username}
+          </h6>
 
           <h3 className="mb-3">{campaign.title}</h3>
           <p className="mb-3">{campaign.description}</p>

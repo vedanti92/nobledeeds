@@ -54,7 +54,9 @@ function Donation() {
     const newRaisedAmount = campaign.raisedAmount + donation;
 
     if (newRaisedAmount > campaign.goalAmount) {
-      toast.warning("Donation exceeds goal amount! Please enter a lower amount.");
+      toast.warning(
+        "Donation exceeds goal amount! Please enter a lower amount."
+      );
       return;
     }
 
@@ -62,11 +64,11 @@ function Donation() {
       await axios.put(
         `http://localhost:8080/donate/${id}`,
         { raisedAmount: donation },
-        { 
+        {
           withCredentials: true,
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -89,7 +91,7 @@ function Donation() {
 
   return (
     <div
-      className="container"
+      className="donation-container"
       style={{
         display: "flex",
         flexDirection: "column",

@@ -13,20 +13,31 @@ import { AuthContext } from "../context/AuthContext";
 function Home() {
   const { isAuthenticated } = useContext(AuthContext);
   const [username, setUsername] = useState("");
-  const [hasShownWelcome, setHasShownWelcome] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (isAuthenticated && !hasShownWelcome) {
+      if (isAuthenticated) {
         try {
           const { data } = await axios.post(
             "http://localhost:8080/",
             {},
             { withCredentials: true }
           );
-          setUsername(data.user);
-          toast.success(`Welcome back, ${data.user}!`);
-          setHasShownWelcome(true);
+          // Get the current session ID from localStorage
+          const currentSessionId = localStorage.getItem("sessionId") || "";
+          // Create a unique session identifier combining user and a timestamp
+          const loginSessionId = `${data.user}-${Date.now()}`;
+
+          if (data.user) {
+            // If this is a new session or user changed
+            if (!currentSessionId || !currentSessionId.startsWith(data.user)) {
+              // Show welcome message
+              toast.success(`Welcome back, ${data.user}!`);
+              // Save the new session ID
+              localStorage.setItem("sessionId", loginSessionId);
+            }
+            setUsername(data.user);
+          }
         } catch (error) {
           console.error("Error fetching user data:", error);
           toast.error("Error fetching user data");

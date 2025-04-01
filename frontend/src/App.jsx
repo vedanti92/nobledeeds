@@ -12,12 +12,15 @@ import Account from "./pages/Account";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { CookiesProvider } from "react-cookie";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <CookiesProvider>
       <BrowserRouter>
-        <AuthProvider> {/* Now inside BrowserRouter */}
+        <AuthProvider>
+          {" "}
+          {/* Now inside BrowserRouter */}
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -30,6 +33,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/:id" element={<CampaignDetails />} />
           </Routes>
+          <ToastContainer />
         </AuthProvider>
       </BrowserRouter>
     </CookiesProvider>

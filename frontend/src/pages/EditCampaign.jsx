@@ -10,6 +10,7 @@ function EditCampaign() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    orgInfo: "",
     image: "",
     goalAmount: "",
     category: "",
@@ -127,6 +128,23 @@ function EditCampaign() {
             />
             <div className="invalid-feedback">
               Please provide a description.
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="orgInfo" className="form-label">
+              Organization Information
+            </label>
+            <textarea
+              name="orgInfo"
+              id="orgInfo"
+              required
+              className="form-control"
+              value={formData.orgInfo}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">
+              Please provide information about your organization.
             </div>
           </div>
 

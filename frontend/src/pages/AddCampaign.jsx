@@ -12,6 +12,7 @@ function AddCampaign() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    orgInfo: "",
     image: "",
     goalAmount: "",
     category: "",
@@ -53,6 +54,7 @@ function AddCampaign() {
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("description", formData.description);
+    formDataToSend.append("orgInfo", formData.orgInfo);
     formDataToSend.append("goalAmount", formData.goalAmount);
     formDataToSend.append("category", formData.category);
     formDataToSend.append("orgName", formData.orgName);
@@ -119,6 +121,23 @@ function AddCampaign() {
             />
             <div className="invalid-feedback">
               Please provide a description.
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="orgInfo" className="form-label">
+              Organization Information
+            </label>
+            <textarea
+              name="orgInfo"
+              id="orgInfo"
+              required
+              className="form-control"
+              value={formData.orgInfo}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">
+              Please provide information about your organization.
             </div>
           </div>
 

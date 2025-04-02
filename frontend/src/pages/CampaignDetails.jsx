@@ -146,6 +146,9 @@ function CampaignDetails() {
 
           <h3 className="mb-3">{campaign.title}</h3>
           <p className="mb-3">{campaign.description}</p>
+
+          <h3 className="mb-3 mt-5">About Organization</h3>
+          <p className="mb-3">{campaign.orgInfo}</p>
         </div>
         <div className="col-1"></div>
         <div

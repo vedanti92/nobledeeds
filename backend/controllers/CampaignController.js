@@ -1,5 +1,6 @@
 const Campaign = require("../models/campaigns");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 module.exports.getAllCampaigns = async (req, res) => {
   try {
@@ -117,6 +118,12 @@ module.exports.donateToCampaign = async (req, res) => {
 };
 
 module.exports.showCampaign = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: "Campaign not found" });
+  }
+
   try {
     const campaign = await Campaign.findById(req.params.id).populate(
       "userId",

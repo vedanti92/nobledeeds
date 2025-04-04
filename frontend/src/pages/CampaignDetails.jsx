@@ -34,6 +34,7 @@ function CampaignDetails() {
       } catch (err) {
         console.error("Error fetching campaign", err);
         toast.error("Error fetching campaign details");
+        navigate("/notfound");
       }
     };
     fetchCampaign();

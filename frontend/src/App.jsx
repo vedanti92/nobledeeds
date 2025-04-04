@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { CookiesProvider } from "react-cookie";
 import { ToastContainer } from "react-toastify";
+import NotFound from "./pages/NotFound.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/:id" element={<CampaignDetails />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer />
         </AuthProvider>

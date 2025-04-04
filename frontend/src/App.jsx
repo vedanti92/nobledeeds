@@ -33,6 +33,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/:id" element={<CampaignDetails />} />
+            <Route path="/notfound" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer />

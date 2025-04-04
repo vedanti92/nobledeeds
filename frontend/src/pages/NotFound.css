@@ -1,0 +1,21 @@
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 250px;
+  justify-content: center;
+  align-items: center;
+}
+
+.goback {
+  width: 280px;
+  border: none;
+  background-color: #6cd4ff;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+}
+
+.goback:hover {
+  background-color: #51cafc;
+}

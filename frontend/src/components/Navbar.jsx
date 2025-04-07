@@ -19,7 +19,6 @@ import { useContext } from "react";
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useContext(AuthContext);
 

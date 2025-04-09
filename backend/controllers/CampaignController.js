@@ -82,7 +82,6 @@ module.exports.donateToCampaign = async (req, res) => {
     const { id } = req.params;
     const { raisedAmount } = req.body;
 
-    // Validate the donation amount
     if (!raisedAmount || isNaN(raisedAmount) || raisedAmount <= 0) {
       return res.status(400).json({ message: "Invalid donation amount" });
     }

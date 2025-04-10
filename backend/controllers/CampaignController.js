@@ -92,14 +92,12 @@ module.exports.donateToCampaign = async (req, res) => {
       return res.status(404).json({ message: "Campaign not found" });
     }
 
-    // Check if donation would exceed goal amount
     if (campaign.raisedAmount + raisedAmount > campaign.goalAmount) {
       return res
         .status(400)
         .json({ message: "Donation would exceed campaign goal" });
     }
 
-    // Update the campaign with the new amount
     const updatedCampaign = await Campaign.findByIdAndUpdate(
       id,
       { $inc: { raisedAmount: raisedAmount } },

@@ -1,0 +1,13 @@
+.account-container {
+  padding: 0 1rem;
+}
+@media (min-width: 768px) {
+  .account-container {
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .account-container {
+    padding: 0 5rem;
+  }
+}

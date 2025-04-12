@@ -5,6 +5,7 @@ import { Container, Typography, Paper, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import CampaignCard from "../components/CampaignCard";
 import { AuthContext } from "../context/AuthContext";
+import "./Account.css"
 
 const Account = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const Account = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 12, mb: 4 }}>
+    <Container className="account-container" maxWidth="lg" sx={{ mt: 12, mb: 4 }}>
       {/* User Information Section */}
       <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
         <Typography variant="h4" gutterBottom>

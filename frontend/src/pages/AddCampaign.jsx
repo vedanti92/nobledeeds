@@ -82,7 +82,7 @@ function AddCampaign() {
   };
 
   return (
-    <div className="row mb-5">
+    <div className="add-container row mb-5">
       <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>Add Campaign</h2>
         <form

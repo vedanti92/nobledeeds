@@ -1,0 +1,15 @@
+.edit-container {
+    padding-left: 2rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 768px) {
+    .edit-container {
+      padding: 0 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .edit-container {
+      padding: 0 5rem;
+    }
+  }
+  

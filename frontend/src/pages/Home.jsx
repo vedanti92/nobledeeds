@@ -50,7 +50,7 @@ function Home() {
 
   return (
     <>
-      <div>
+      <div className="home-container">
         <Carousel />
         <div className="categories-container">
           <Categories />

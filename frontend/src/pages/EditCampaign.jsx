@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./EditCampaign.css";
 
 function EditCampaign() {
   const navigate = useNavigate();
@@ -88,7 +89,7 @@ function EditCampaign() {
   };
 
   return (
-    <div className="row mb-5">
+    <div className="edit-container row mb-5">
       <ToastContainer />
       <div style={{ marginTop: "80px", width: "100%" }}>
         <h2>{id ? "Edit Campaign" : "Add Campaign"}</h2>

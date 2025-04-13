@@ -1,22 +1,22 @@
-@media (max-width: 768px) {
-  .details-row {
-    display: flex !important;
-    flex-direction: column !important;
+@media (min-width: 375px) and (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: column;
   }
 
   .col-7,
   .col-4,
   .col-1 {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
   }
 
   .col-4 {
-    margin-top: 30px !important;
+    margin-top: 30px;
     margin-bottom: 30px;
   }
 
   .col-1 {
-    display: none !important;
+    display: none;
   }
 }

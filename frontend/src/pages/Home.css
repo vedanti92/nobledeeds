@@ -7,11 +7,13 @@
   border-radius: 8px;
 }
 
-.home-container {
-  padding-left: 2rem;
-  padding-right: 1rem;
+@media (min-width: 375px) {
+  .home-container {
+    padding-left: 5rem;
+    padding-right: 1rem;
+  }
 }
-@media (min-width: 768px) {
+@media (min-width: 415px) {
   .home-container {
     padding: 0 2rem;
   }

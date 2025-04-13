@@ -3,6 +3,10 @@
   height: 38px !important;
 }
 
+textarea.form-control {
+  height: fit-content !important;
+}
+
 .add-container {
   padding-left: 2rem;
   padding-right: 1rem;

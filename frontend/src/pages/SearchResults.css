@@ -1,0 +1,6 @@
+@media (max-width: 500px) {
+  .results-container {
+    padding-left: 8rem !important;
+    padding-right: 1rem;
+  }
+}

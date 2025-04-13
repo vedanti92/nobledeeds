@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Typography, LinearProgress } from "@mui/material";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import "./CampaignDetails.css";
 
 function CampaignDetails() {
   const { id } = useParams();
@@ -76,7 +77,7 @@ function CampaignDetails() {
       className="show-container mx-auto"
       style={{ marginTop: "80px", width: "80%" }}
     >
-      <div className="row">
+      <div className="details-row">
         <div className="col-7">
           <div
             className="d-flex align-items-center justify-content-between"

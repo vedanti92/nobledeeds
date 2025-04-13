@@ -12,7 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./Navbar.css";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 

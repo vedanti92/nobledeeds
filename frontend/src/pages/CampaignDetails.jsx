@@ -77,7 +77,7 @@ function CampaignDetails() {
       className="show-container mx-auto"
       style={{ marginTop: "80px", width: "80%" }}
     >
-      <div className="details-row">
+      <div className="row">
         <div className="col-7">
           <div
             className="d-flex align-items-center justify-content-between"

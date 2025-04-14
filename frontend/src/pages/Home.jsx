@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import Grid from "@mui/material/Grid2";
+import { Grid, Container } from "@mui/material";
 import Carousel from "../components/Carousel";
 import Categories from "../components/Categories";
 import CampaignCard from "../components/CampaignCard";
-import { Container } from "@mui/material";
 import "./Home.css";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";

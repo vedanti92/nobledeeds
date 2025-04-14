@@ -1,7 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import Grid from "@mui/material/Grid2";
-import { Container } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import CampaignCard from "../components/CampaignCard";
 import "./SearchResults.css";
 

@@ -23,7 +23,7 @@ function Donation() {
     // Fetch campaign details
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`/${id}`);
+        const response = await axios.get(`/campaign/${id}`);
         setCampaign(response.data);
       } catch (err) {
         console.error("Error fetching campaign", err);
@@ -73,7 +73,7 @@ function Donation() {
       );
 
       toast.success("Thank you for your donation!");
-      navigate(`/${id}`);
+      navigate(`/campaign/${id}`);
     } catch (error) {
       console.error("Error updating donation:", error);
       if (error.response?.status === 401) {

@@ -42,7 +42,7 @@ function EditCampaign() {
 
   const fetchCampaign = async () => {
     try {
-      const response = await axios.get(`/${id}`, {
+      const response = await axios.get(`/campaign/${id}`, {
         withCredentials: true,
       });
 
@@ -119,7 +119,7 @@ function EditCampaign() {
 
       if (response.data) {
         toast.success("Campaign updated successfully!");
-        navigate(`/${id}`);
+        navigate(`/campaign/${id}`);
       }
     } catch (error) {
       console.error("Error updating campaign:", error);

@@ -27,7 +27,8 @@ router.put("/editCampaign/:id", isLoggedIn, upload.single("image"), editCampaign
 // Campaign donation
 router.put("/donate/:id", isLoggedIn, donateToCampaign);
 
-// Dynamic route for campaign ID should be last
-router.route("/:id").get(showCampaign).delete(isLoggedIn, deleteCampaign);
+// Campaign detail routes
+router.get("/campaign/:id", showCampaign);
+router.delete("/campaign/:id", isLoggedIn, deleteCampaign);
 
 module.exports = router;

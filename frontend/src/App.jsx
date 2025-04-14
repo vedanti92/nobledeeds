@@ -24,15 +24,20 @@ function App() {
           {/* Now inside BrowserRouter */}
           <Navbar />
           <Routes>
+            {/* Static routes first */}
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResults />} />
-            <Route path="/addCampaign" element={<AddCampaign />} />
-            <Route path="/editCampaign/:id" element={<EditCampaign />} />
-            <Route path="/donate/:id" element={<Donation />} />
             <Route path="/account" element={<Account />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/:id" element={<CampaignDetails />} />
+            <Route path="/addCampaign" element={<AddCampaign />} />
+            
+            {/* Campaign specific routes */}
+            <Route path="/campaign/:id" element={<CampaignDetails />} />
+            <Route path="/editCampaign/:id" element={<EditCampaign />} />
+            <Route path="/donate/:id" element={<Donation />} />
+            
+            {/* Error routes */}
             <Route path="/notfound" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

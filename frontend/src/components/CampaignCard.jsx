@@ -64,7 +64,7 @@ export default function CampaignCard({ campaign }) {
         }}
       >
         <Button
-          href={`/${campaign._id}`}
+          href={`/campaign/${campaign._id}`}
           variant="outlined"
           sx={{ fontFamily: "Merriweather, serif" }}
         >

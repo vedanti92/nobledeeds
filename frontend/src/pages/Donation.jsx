@@ -144,6 +144,7 @@ function Donation() {
               variant="outlined"
               color="error"
               style={{ width: "100%" }}
+              sx={{ fontFamily: "Merriweather, serif" }}
             >
               Donate
             </Button>

@@ -39,16 +39,29 @@ function SearchResults() {
       {results.length === 0 ? (
         <h5 className="text-muted">No results found.</h5>
       ) : (
-        <Container sx={{ my: 4 }}>
-          <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            alignItems="center"
+        <Container maxWidth="lg">
+          <Grid 
+            container 
+            spacing={4}
+            justifyContent="flex-start"
+            alignItems="stretch"
+            sx={{ minHeight: '60vh' }}
           >
             {results.map((campaign) => (
-              <Grid item xs={12} sm={6} md={4} key={campaign._id}>
-                <CampaignCard campaign={campaign} />
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={4} 
+                key={campaign._id}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ height: '100%' }}>
+                  <CampaignCard campaign={campaign} />
+                </div>
               </Grid>
             ))}
           </Grid>

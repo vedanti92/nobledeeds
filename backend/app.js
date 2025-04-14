@@ -14,14 +14,33 @@ const port = process.env.PORT;
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ["https://nobledeeds.onrender.com", "http://localhost:5173"],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+
+// CORS configuration
+const corsOptions = {
+  origin: ["https://nobledeeds.onrender.com", "http://localhost:5173"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["set-cookie"]
+};
+
+app.use(cors(corsOptions));
+
+// Set cookie options for all routes
+app.use((req, res, next) => {
+  res.cookie = res.cookie.bind(res);
+  res.cookie = (name, value, options = {}) => {
+    const defaultOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    };
+    return res.cookie(name, value, { ...defaultOptions, ...options });
+  };
+  next();
+});
 
 // Routes - Auth routes should come before campaign routes
 app.use("/", authRoute);

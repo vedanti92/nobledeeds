@@ -73,9 +73,15 @@ const Campaigns = () => {
     axios
       .get("/home", {
         params: { category: selectedCategory },
+        withCredentials: true
       })
-      .then((res) => setCampaigns(res.data))
-      .catch((err) => console.error("Error fetching campaigns:", err));
+      .then((res) => {
+        setCampaigns(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching campaigns:", err);
+        toast.error("Error loading campaigns");
+      });
   }, [selectedCategory]);
 
   const filteredCampaigns =
@@ -85,16 +91,36 @@ const Campaigns = () => {
 
   return (
     <>
-      <Container sx={{ my: 4 }}>
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Container maxWidth="lg">
+        <Grid 
+          container 
+          spacing={4}
+          justifyContent="flex-start"
+          alignItems="stretch"
+          sx={{ minHeight: '60vh' }}
+        >
           {filteredCampaigns.length > 0 ? (
             filteredCampaigns.map((campaign) => (
-              <Grid item xs={12} sm={6} md={4} key={campaign._id}>
-                <CampaignCard campaign={campaign} />
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={4} 
+                key={campaign._id}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ height: '100%' }}>
+                  <CampaignCard campaign={campaign} />
+                </div>
               </Grid>
             ))
           ) : (
-            <h6>No campaigns found for this category.</h6>
+            <Grid item xs={12}>
+              <h6 className="text-center">No campaigns found for this category.</h6>
+            </Grid>
           )}
         </Grid>
       </Container>

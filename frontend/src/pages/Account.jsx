@@ -77,10 +77,28 @@ const Account = () => {
         My Campaigns
       </Typography>
       {userCampaigns.length > 0 ? (
-        <Grid container spacing={3}>
+        <Grid 
+          container 
+          spacing={4}
+          justifyContent="flex-start"
+          alignItems="stretch"
+          sx={{ minHeight: '60vh' }}
+        >
           {userCampaigns.map((campaign) => (
-            <Grid item xs={12} sm={6} md={4} key={campaign._id}>
-              <CampaignCard campaign={campaign} />
+            <Grid 
+              item 
+              xs={12} 
+              sm={6} 
+              md={4} 
+              key={campaign._id}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <div style={{ height: '100%' }}>
+                <CampaignCard campaign={campaign} />
+              </div>
             </Grid>
           ))}
         </Grid>

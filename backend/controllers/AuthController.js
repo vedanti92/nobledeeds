@@ -18,10 +18,16 @@ module.exports.Signup = async (req, res, next) => {
     }
     const user = await User.create({ email, username, password });
     const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-    });
+    
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    };
+
+    res.cookie("token", token, cookieOptions);
     res
       .status(201)
       .json({ message: "User signed in successfully", success: true, user });
@@ -50,13 +56,15 @@ module.exports.Login = async (req, res) => {
 
     const token = createSecretToken(user._id);
     
-    res.cookie("token", token, {
+    const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       path: "/",
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
-    });
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    };
+
+    res.cookie("token", token, cookieOptions);
 
     res.json({
       success: true,

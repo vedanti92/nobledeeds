@@ -23,7 +23,9 @@ function Donation() {
     // Fetch campaign details
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`/campaign/${id}`);
+        const response = await axios.get(`/campaign/${id}`, {
+          withCredentials: true
+        });
         setCampaign(response.data);
       } catch (err) {
         console.error("Error fetching campaign", err);

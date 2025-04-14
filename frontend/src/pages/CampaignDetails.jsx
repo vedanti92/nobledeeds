@@ -16,7 +16,9 @@ function CampaignDetails() {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`/campaign/${id}`);
+        const response = await axios.get(`/campaign/${id}`, {
+          withCredentials: true
+        });
         setCampaign(response.data);
 
         if (isAuthenticated) {
@@ -54,7 +56,9 @@ function CampaignDetails() {
   const handleDeleteClick = async () => {
     if (window.confirm("Are you sure you want to delete this campaign?")) {
       try {
-        await axios.delete(`/campaign/${id}`, { withCredentials: true });
+        await axios.delete(`/campaign/${id}`, { 
+          withCredentials: true 
+        });
         toast.success("Campaign deleted successfully");
         navigate("/");
       } catch (error) {

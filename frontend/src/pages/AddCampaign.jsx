@@ -5,6 +5,7 @@ import "./AddCampaign.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function AddCampaign() {
   const { isAuthenticated } = useContext(AuthContext);
@@ -31,7 +32,7 @@ function AddCampaign() {
     if (e.target.name === "image") {
       setFormData({
         ...formData,
-        image: e.target.files[0], // Store the file object
+        image: e.target.files[0],
       });
     } else {
       setFormData({
@@ -59,25 +60,23 @@ function AddCampaign() {
     formDataToSend.append("category", formData.category);
     formDataToSend.append("orgName", formData.orgName);
     formDataToSend.append("location", formData.location);
-    formDataToSend.append("image", formData.image); // Append file
+    formDataToSend.append("image", formData.image);
 
     try {
-      const response = await fetch("/addCampaign", {
-        method: "POST",
-        body: formDataToSend,
-        credentials: "include",
+      const response = await axios.post("/addCampaign", formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        withCredentials: true
       });
 
-      if (response.ok) {
+      if (response.data) {
         toast.success("Campaign created successfully!");
         navigate("/");
-      } else {
-        const errorMessage = await response.json();
-        toast.error(errorMessage.message || "Failed to add campaign");
       }
     } catch (error) {
       console.error("Error adding campaign:", error);
-      toast.error("Failed to add campaign");
+      toast.error(error.response?.data?.message || "Failed to add campaign");
     }
   };
 

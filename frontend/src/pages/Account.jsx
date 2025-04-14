@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid2";
 import CampaignCard from "../components/CampaignCard";
 import { AuthContext } from "../context/AuthContext";
 import "./Account.css"
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const Account = () => {
   const { isAuthenticated } = useContext(AuthContext);

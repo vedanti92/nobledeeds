@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 
 // Set cookie options for all routes
 app.use((req, res, next) => {
-  res.cookie = res.cookie.bind(res);
+  const originalCookie = res.cookie.bind(res);
   res.cookie = (name, value, options = {}) => {
     const defaultOptions = {
       httpOnly: true,
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
       path: "/",
       maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
     };
-    return res.cookie(name, value, { ...defaultOptions, ...options });
+    return originalCookie(name, value, { ...defaultOptions, ...options });
   };
   next();
 });

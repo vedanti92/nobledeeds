@@ -57,23 +57,40 @@ module.exports.editCampaign = async (req, res) => {
     const userId = decoded.id;
 
     const campaign = await Campaign.findById(req.params.id);
-    if (!campaign)
-      return res.status(404).json({ message: "Campaign not found" });
+    if (!campaign) return res.status(404).json({ message: "Campaign not found" });
 
     if (campaign.userId.toString() !== userId) {
-      return res
-        .status(403)
-        .json({ message: "You do not have permission to edit this campaign" });
+      return res.status(403).json({
+        message: "You do not have permission to edit this campaign",
+      });
+    }
+
+    // Create update object
+    const updateData = {
+      title: req.body.title,
+      description: req.body.description,
+      orgInfo: req.body.orgInfo,
+      goalAmount: req.body.goalAmount,
+      category: req.body.category,
+      orgName: req.body.orgName,
+      location: req.body.location,
+    };
+
+    // If there's a new image file, update the image path
+    if (req.file) {
+      updateData.image = req.file.path;
     }
 
     const updatedCampaign = await Campaign.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true }
-    );
+    ).populate("userId", "username");
+
     res.json(updatedCampaign);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error updating campaign:", error);
+    res.status(400).json({ message: error.message });
   }
 };
 

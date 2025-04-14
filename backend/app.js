@@ -1,4 +1,3 @@
-const Campaign = require("./models/campaigns");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
@@ -15,7 +14,7 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://nobledeeds.onrender.com/",
+    origin: "https://nobledeeds.onrender.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],

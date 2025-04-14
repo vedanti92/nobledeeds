@@ -53,12 +53,26 @@ function Navbar() {
           {/* Desktop Nav */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, ml: 2 }}>
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+              <Button
+                sx={{
+                  mx: 2,
+                  color: "black",
+                  display: "block",
+                  fontFamily: "Merriweather, serif",
+                }}
+              >
                 Home
               </Button>
             </Link>
             <Link to="/addCampaign" style={{ textDecoration: "none" }}>
-              <Button sx={{ mx: 2, color: "black", display: "block" }}>
+              <Button
+                sx={{
+                  mx: 2,
+                  color: "black",
+                  display: "block",
+                  fontFamily: "Merriweather, serif",
+                }}
+              >
                 Add Campaign
               </Button>
             </Link>
@@ -69,7 +83,12 @@ function Navbar() {
             <form onSubmit={handleSearch}>
               <div
                 className="search-bar"
-                style={{ display: "flex", alignItems: "center", gap: "5px", margin: "10px" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  margin: "10px",
+                }}
               >
                 <input
                   type="text"
@@ -114,15 +133,38 @@ function Navbar() {
             {isAuthenticated ? (
               <>
                 <Link to="/account" style={{ textDecoration: "none" }}>
-                  <Button sx={{ mx: 2, color: "black" }}>Account</Button>
+                  <Button
+                    sx={{
+                      mx: 2,
+                      color: "black",
+                      fontFamily: "Merriweather, serif",
+                    }}
+                  >
+                    Account
+                  </Button>
                 </Link>
-                <Button sx={{ mx: 2, color: "black" }} onClick={handleLogout}>
+                <Button
+                  sx={{
+                    mx: 2,
+                    color: "black",
+                    fontFamily: "Merriweather, serif",
+                  }}
+                  onClick={handleLogout}
+                >
                   Logout
                 </Button>
               </>
             ) : (
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <Button sx={{ mx: 2, color: "black" }}>Login</Button>
+                <Button
+                  sx={{
+                    mx: 2,
+                    color: "black",
+                    fontFamily: "Merriweather, serif",
+                  }}
+                >
+                  Login
+                </Button>
               </Link>
             )}
           </Box>

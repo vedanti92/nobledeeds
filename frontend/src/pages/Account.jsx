@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid2";
 import CampaignCard from "../components/CampaignCard";
 import { AuthContext } from "../context/AuthContext";
 import "./Account.css"
+import { toast } from "react-hot-toast";
 
 const Account = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -22,10 +23,16 @@ const Account = () => {
     const fetchUserData = async () => {
       try {
         const { data } = await axios.post(
-          "https://nobledeeds-backend.onrender.com",
+          "/",
           {},
           { withCredentials: true }
         );
+
+        if (!data.status) {
+          toast.error("Session expired. Please login again.");
+          navigate("/login");
+          return;
+        }
 
         setUserInfo({
           username: data.user,
@@ -33,12 +40,13 @@ const Account = () => {
         });
 
         const campaignsResponse = await axios.get(
-          `https://nobledeeds-backend.onrender.com/user/campaigns`,
+          `/user/campaigns`,
           { withCredentials: true }
         );
         setUserCampaigns(campaignsResponse.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
+        toast.error("Error fetching user data. Please try logging in again.");
         navigate("/login");
       }
     };

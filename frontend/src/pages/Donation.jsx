@@ -23,12 +23,12 @@ function Donation() {
     // Fetch campaign details
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`https://nobledeeds-backend.onrender.com/${id}`);
+        const response = await axios.get(`/${id}`);
         setCampaign(response.data);
       } catch (err) {
         console.error("Error fetching campaign", err);
         toast.error("Error fetching campaign details");
-        navigate("/");
+        navigate("/notfound");
       }
     };
 
@@ -62,7 +62,7 @@ function Donation() {
 
     try {
       await axios.put(
-        `https://nobledeeds-backend.onrender.com/donate/${id}`,
+        `/donate/${id}`,
         { raisedAmount: donation },
         {
           withCredentials: true,

@@ -10,22 +10,27 @@ function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`https://nobledeeds-backend.onrender.com/${id}`);
+        const response = await axios.get(`/${id}`);
         setCampaign(response.data);
 
         if (isAuthenticated) {
           // Check if current user is the campaign owner
           const userResponse = await axios.post(
-            "https://nobledeeds-backend.onrender.com/",
+            "/",
             {},
             { withCredentials: true }
           );
+
+          if (!userResponse.data.status) {
+            setIsAuthenticated(false);
+            return;
+          }
 
           const loggedInUserUsername = String(userResponse.data.user);
           const campaignOwnerUsername = String(response.data.userId.username);
@@ -49,12 +54,17 @@ function CampaignDetails() {
   const handleDeleteClick = async () => {
     if (window.confirm("Are you sure you want to delete this campaign?")) {
       try {
-        await axios.delete(`https://nobledeeds-backend.onrender.com/${id}`);
+        await axios.delete(`/${id}`, { withCredentials: true });
         toast.success("Campaign deleted successfully");
         navigate("/");
       } catch (error) {
         console.error("Error deleting campaign:", error);
-        toast.error("Failed to delete campaign");
+        if (error.response?.status === 401) {
+          toast.error("Please login to delete campaign");
+          navigate("/login");
+        } else {
+          toast.error("Failed to delete campaign");
+        }
       }
     }
   };

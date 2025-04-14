@@ -218,6 +218,7 @@ function CampaignDetails() {
               onClick={handleDonateClick}
               variant="outlined"
               color="error"
+              sx={{ fontFamily: "Merriweather, serif" }}
             >
               Donate
             </Button>

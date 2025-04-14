@@ -12,7 +12,7 @@ export default function CampaignCard({ campaign }) {
   return (
     <Card sx={{ maxWidth: 345 }} style={{ height: "26rem", width: "24rem" }}>
       <CardMedia
-        sx={{ height: 160 }}
+        sx={{ height: 160, fontFamily: "Merriweather, serif" }}
         image={campaign.image}
         title={campaign.title}
       />
@@ -20,7 +20,11 @@ export default function CampaignCard({ campaign }) {
         <div className="body" style={{ height: "8rem" }}>
           <Typography
             gutterBottom
-            style={{ fontSize: "18px", fontWeight: "500" }}
+            style={{
+              fontSize: "18px",
+              fontWeight: "500",
+              fontFamily: "Merriweather, serif",
+            }}
           >
             {campaign.title}
           </Typography>
@@ -32,6 +36,7 @@ export default function CampaignCard({ campaign }) {
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 3,
               overflow: "hidden",
+              fontFamily: "Merriweather, serif",
             }}
           >
             {campaign.description}
@@ -43,16 +48,34 @@ export default function CampaignCard({ campaign }) {
             variant="determinate"
             value={(campaign.raisedAmount / campaign.goalAmount) * 100}
           />
-          <Typography variant="caption">
+          <Typography
+            variant="caption"
+            sx={{ fontFamily: "Merriweather, serif" }}
+          >
             ₹ {campaign.raisedAmount} Amount Raised
           </Typography>
         </Box>
       </CardContent>
-      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button href={`/${campaign._id}`} variant="outlined">
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontFamily: "Merriweather, serif",
+        }}
+      >
+        <Button
+          href={`/${campaign._id}`}
+          variant="outlined"
+          sx={{ fontFamily: "Merriweather, serif" }}
+        >
           Show More
         </Button>
-        <Button href={`/donate/${campaign._id}`} variant="outlined" color="error">
+        <Button
+          href={`/donate/${campaign._id}`}
+          variant="outlined"
+          color="error"
+          sx={{ fontFamily: "Merriweather, serif" }}
+        >
           Donate
         </Button>
       </CardActions>

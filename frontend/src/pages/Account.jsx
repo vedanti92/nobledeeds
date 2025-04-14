@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Container, Typography, Paper, Box } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { Container, Typography, Paper, Box, Grid } from "@mui/material";
 import CampaignCard from "../components/CampaignCard";
 import { AuthContext } from "../context/AuthContext";
 import "./Account.css"

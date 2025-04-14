@@ -25,7 +25,7 @@ function Categories() {
     <div className="categories-container">
       <Box>
         <FormControl sx={{ width: 160}}>
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
+          <InputLabel id="demo-simple-select-label" sx={{ top: '-8px' }}>Category</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

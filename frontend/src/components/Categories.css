@@ -19,3 +19,7 @@
 i {
   width: 20px;
 }
+
+.category-name {
+  font-family: "Merriweather", serif !important;
+}

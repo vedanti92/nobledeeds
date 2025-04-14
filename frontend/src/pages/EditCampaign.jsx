@@ -68,7 +68,6 @@ function EditCampaign() {
 
   const handleChange = (e) => {
     if (e.target.name === "image") {
-      console.log("New image selected:", e.target.files[0]);
       setFormData({
         ...formData,
         image: e.target.files[0], // Store the File object directly

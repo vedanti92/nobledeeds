@@ -243,7 +243,12 @@ function AddCampaign() {
           </div>
 
           <div className="mt-3">
-            <Button type="submit" variant="outlined" color="error">
+            <Button
+              type="submit"
+              variant="outlined"
+              color="error"
+              sx={{ fontFamily: "Merriweather, serif" }}
+            >
               Add Campaign
             </Button>
           </div>

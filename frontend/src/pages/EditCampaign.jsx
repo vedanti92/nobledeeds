@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import "./EditCampaign.css";
+import axios from "axios";
 
 function EditCampaign() {
   const navigate = useNavigate();
-  const { id } = useParams(); // Get campaign ID from URL
+  const { id } = useParams();
+  const { isAuthenticated } = React.useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     orgInfo: "",
-    image: "",
+    image: null,
     goalAmount: "",
     category: "",
     orgName: "",
@@ -21,39 +24,65 @@ function EditCampaign() {
 
   const [existingImage, setExistingImage] = useState("");
 
-  // Fetch existing campaign data if editing
+  // Check authentication
   useEffect(() => {
-    if (id) {
+    if (!isAuthenticated) {
+      toast.error("Please login to edit campaigns");
+      navigate("/login");
+      return;
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Fetch existing campaign data
+  useEffect(() => {
+    if (id && isAuthenticated) {
       fetchCampaign();
     }
-  }, [id]);
+  }, [id, isAuthenticated]);
 
   const fetchCampaign = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/${id}`);
-      const data = await response.json();
-      setFormData({ ...data, image: "" });
-      setExistingImage(data.image);
+      const response = await axios.get(`http://localhost:8080/${id}`, {
+        withCredentials: true,
+      });
+
+      if (response.data) {
+        setFormData({
+          title: response.data.title || "",
+          description: response.data.description || "",
+          orgInfo: response.data.orgInfo || "",
+          image: null,
+          goalAmount: response.data.goalAmount || "",
+          category: response.data.category || "",
+          orgName: response.data.orgName || "",
+          location: response.data.location || "",
+        });
+        setExistingImage(response.data.image);
+      }
     } catch (error) {
       console.error("Error fetching campaign:", error);
       toast.error("Failed to fetch campaign details");
+      navigate("/");
     }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "image") {
+      console.log("New image selected:", e.target.files[0]);
+      setFormData({
+        ...formData,
+        image: e.target.files[0], // Store the File object directly
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const updatedData = {
-      ...formData,
-      image: formData.image || existingImage, // Keep old image if new one isn't provided
-    };
 
     const form = e.currentTarget;
     if (!form.checkValidity()) {
@@ -63,28 +92,39 @@ function EditCampaign() {
     }
 
     try {
-      const url = id
-        ? `http://localhost:8080/editCampaign/${id}`
-        : "http://localhost:8080/addCampaign";
+      const formDataToSend = new FormData();
 
-      const response = await fetch(url, {
-        method: id ? "PUT" : "POST",
+      // Add all text fields
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("orgInfo", formData.orgInfo);
+      formDataToSend.append("goalAmount", formData.goalAmount);
+      formDataToSend.append("category", formData.category);
+      formDataToSend.append("orgName", formData.orgName);
+      formDataToSend.append("location", formData.location);
+
+      // Handle image - if new image selected, use that, otherwise keep existing
+      if (formData.image instanceof File) {
+        formDataToSend.append("image", formData.image);
+      }
+
+      const response = await axios({
+        method: "put",
+        url: `http://localhost:8080/editCampaign/${id}`,
+        data: formDataToSend,
+        withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(updatedData),
       });
 
-      if (response.ok) {
-        toast.success("Campaign saved successfully");
+      if (response.data) {
+        toast.success("Campaign updated successfully!");
         navigate(`/${id}`);
-      } else {
-        const errorMessage = await response.json();
-        toast.error(errorMessage.message || "Failed to save campaign");
       }
     } catch (error) {
-      console.error("Error saving campaign:", error);
-      toast.error("Failed to save campaign");
+      console.error("Error updating campaign:", error);
+      toast.error(error.response?.data?.message || "Failed to update campaign");
     }
   };
 
@@ -92,7 +132,7 @@ function EditCampaign() {
     <div className="edit-container row mb-5">
       <ToastContainer />
       <div style={{ marginTop: "80px", width: "100%" }}>
-        <h2>{id ? "Edit Campaign" : "Add Campaign"}</h2>
+        <h2>Edit Campaign</h2>
         <form
           onSubmit={handleSubmit}
           className="needs-validation"
@@ -155,7 +195,7 @@ function EditCampaign() {
                 <p>Existing Image:</p>
                 <img
                   src={existingImage}
-                  alt="Existing Image"
+                  alt="Existing"
                   style={{ width: "150px", borderRadius: "8px" }}
                 />
               </div>
@@ -168,8 +208,8 @@ function EditCampaign() {
               name="image"
               id="image"
               className="form-control"
-              value={formData.image}
               onChange={handleChange}
+              accept="image/*"
             />
             <div className="invalid-feedback">Please upload an image.</div>
           </div>
@@ -267,7 +307,7 @@ function EditCampaign() {
               color="error"
               sx={{ fontFamily: "Merriweather, serif" }}
             >
-              {id ? "Save Changes" : "Add Campaign"}
+              Save Changes
             </Button>
           </div>
         </form>

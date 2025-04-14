@@ -18,7 +18,7 @@ const {
 router.get("/home", getAllCampaigns);
 router.get("/search", searchCampaigns);
 router.post("/addCampaign", isLoggedIn, upload.single("image"), createCampaign);
-router.put("/editCampaign/:id", isLoggedIn, editCampaign);
+router.put("/editCampaign/:id", isLoggedIn, upload.single("image"), editCampaign);
 router.put("/donate/:id", isLoggedIn, donateToCampaign);
 router.route("/:id").get(showCampaign).delete(isLoggedIn, deleteCampaign);
 router.get("/user/campaigns", isLoggedIn, getUserCampaigns);

@@ -261,7 +261,12 @@ function EditCampaign() {
           </div>
 
           <div className="mt-3">
-            <Button type="submit" variant="outlined" color="error">
+            <Button
+              type="submit"
+              variant="outlined"
+              color="error"
+              sx={{ fontFamily: "Merriweather, serif" }}
+            >
               {id ? "Save Changes" : "Add Campaign"}
             </Button>
           </div>

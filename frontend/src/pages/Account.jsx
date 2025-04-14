@@ -22,7 +22,7 @@ const Account = () => {
     const fetchUserData = async () => {
       try {
         const { data } = await axios.post(
-          "http://localhost:8080",
+          "https://nobledeeds-backend.onrender.com",
           {},
           { withCredentials: true }
         );
@@ -33,7 +33,7 @@ const Account = () => {
         });
 
         const campaignsResponse = await axios.get(
-          `http://localhost:8080/user/campaigns`,
+          `https://nobledeeds-backend.onrender.com/user/campaigns`,
           { withCredentials: true }
         );
         setUserCampaigns(campaignsResponse.data);

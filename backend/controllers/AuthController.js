@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const axios = require("axios");
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://nobledeeds-backend.onrender.com";
 
 module.exports.Signup = async (req, res, next) => {
   try {

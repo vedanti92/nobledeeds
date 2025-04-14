@@ -16,13 +16,13 @@ function CampaignDetails() {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/${id}`);
+        const response = await axios.get(`https://nobledeeds-backend.onrender.com/${id}`);
         setCampaign(response.data);
 
         if (isAuthenticated) {
           // Check if current user is the campaign owner
           const userResponse = await axios.post(
-            "http://localhost:8080/",
+            "https://nobledeeds-backend.onrender.com/",
             {},
             { withCredentials: true }
           );
@@ -49,7 +49,7 @@ function CampaignDetails() {
   const handleDeleteClick = async () => {
     if (window.confirm("Are you sure you want to delete this campaign?")) {
       try {
-        await axios.delete(`http://localhost:8080/${id}`);
+        await axios.delete(`https://nobledeeds-backend.onrender.com/${id}`);
         toast.success("Campaign deleted successfully");
         navigate("/");
       } catch (error) {

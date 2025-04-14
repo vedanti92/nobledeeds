@@ -6,7 +6,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://nobledeeds-backend.onrender.com";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

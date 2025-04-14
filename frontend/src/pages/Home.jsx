@@ -19,7 +19,7 @@ function Home() {
       if (isAuthenticated) {
         try {
           const { data } = await axios.post(
-            "http://localhost:8080/",
+            "https://nobledeeds-backend.onrender.com/",
             {},
             { withCredentials: true }
           );
@@ -72,7 +72,7 @@ const Campaigns = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/home", {
+      .get("https://nobledeeds-backend.onrender.com/home", {
         params: { category: selectedCategory },
       })
       .then((res) => setCampaigns(res.data))

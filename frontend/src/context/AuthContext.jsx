@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/",
+        "https://nobledeeds-backend.onrender.com/",
         {},
         { withCredentials: true }
       );
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   const signup = async (email, username, password) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/signup",
+        "https://nobledeeds-backend.onrender.com/signup",
         { email, username, password },
         { withCredentials: true }
       );
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/login",
+        "https://nobledeeds-backend.onrender.com/login",
         { username, password },
         { withCredentials: true }
       );
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post(
-        "http://localhost:8080/logout",
+        "https://nobledeeds-backend.onrender.com/logout",
         {},
         { withCredentials: true }
       );

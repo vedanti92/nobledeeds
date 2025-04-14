@@ -13,7 +13,7 @@ function SearchResults() {
   React.useEffect(() => {
     const query = searchParams.get("query");
     if (query) {
-      fetch(`https://nobledeeds-backend.onrender.com/search?query=${query}`)
+      fetch(`/search?query=${query}`)
         .then((res) => res.json())
         .then((data) => {
           setResults(data);

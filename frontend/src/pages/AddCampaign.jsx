@@ -62,7 +62,7 @@ function AddCampaign() {
     formDataToSend.append("image", formData.image); // Append file
 
     try {
-      const response = await fetch("https://nobledeeds-backend.onrender.com/addCampaign", {
+      const response = await fetch("/addCampaign", {
         method: "POST",
         body: formDataToSend,
         credentials: "include",

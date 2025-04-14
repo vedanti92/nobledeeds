@@ -42,7 +42,7 @@ function EditCampaign() {
 
   const fetchCampaign = async () => {
     try {
-      const response = await axios.get(`https://nobledeeds-backend.onrender.com/${id}`, {
+      const response = await axios.get(`/${id}`, {
         withCredentials: true,
       });
 
@@ -109,7 +109,7 @@ function EditCampaign() {
 
       const response = await axios({
         method: "put",
-        url: `https://nobledeeds-backend.onrender.com/editCampaign/${id}`,
+        url: `/editCampaign/${id}`,
         data: formDataToSend,
         withCredentials: true,
         headers: {

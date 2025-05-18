@@ -1,6 +1,23 @@
-@media (max-width: 500px) {
+.results-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 100px auto 0;
+  padding: 0;
+}
+
+@media (min-width: 375px) {
   .results-container {
-    padding-left: 8rem !important;
+    padding-left: 2.5rem;
     padding-right: 1rem;
+  }
+}
+@media (min-width: 415px) {
+  .results-container {
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .results-container {
+    padding: 0 5rem;
   }
 }

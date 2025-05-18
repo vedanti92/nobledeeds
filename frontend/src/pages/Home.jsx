@@ -91,7 +91,7 @@ const Campaigns = () => {
 
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className="mb-5">
         <Grid 
           container 
           spacing={4}

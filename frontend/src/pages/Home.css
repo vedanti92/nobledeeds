@@ -1,7 +1,7 @@
 .categories-container {
   position: fixed; /* Allows it to float over the page */
-  top: 70px; /* Adjust based on navbar height */
-  left: 10px; /* Adjust for spacing */
+  top: 70px;
+  left: 10px;
   z-index: 1000; /* Ensures it's above other elements */
   padding: 10px;
   border-radius: 8px;

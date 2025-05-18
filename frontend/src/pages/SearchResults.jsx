@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Grid, Container } from "@mui/material";
 import CampaignCard from "../components/CampaignCard";
@@ -7,10 +7,10 @@ import axios from "axios";
 
 function SearchResults() {
   const [searchParams] = useSearchParams();
-  const [results, setResults] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const query = searchParams.get("query");
     if (query) {
       axios.get(`/search`, {
@@ -31,10 +31,7 @@ function SearchResults() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div
-      style={{ marginTop: "100px", padding: "20px" }}
-      className="results-container mx-5"
-    >
+    <div className="results-container">
       <h2 className="mb-5">Search Results</h2>
       {results.length === 0 ? (
         <h5 className="text-muted">No results found.</h5>
@@ -42,10 +39,15 @@ function SearchResults() {
         <Container maxWidth="lg">
           <Grid 
             container 
-            spacing={4}
-            justifyContent="flex-start"
-            alignItems="stretch"
-            sx={{ minHeight: '60vh' }}
+            spacing={6}
+            justifyContent="center"
+            sx={{ 
+              display: 'flex',
+              flexWrap: 'wrap',
+              '@media (min-width: 890px)': {
+                gap: 10
+              }
+            }}
           >
             {results.map((campaign) => (
               <Grid 
@@ -54,14 +56,8 @@ function SearchResults() {
                 sm={6} 
                 md={4} 
                 key={campaign._id}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}
               >
-                <div style={{ height: '100%' }}>
-                  <CampaignCard campaign={campaign} />
-                </div>
+                <CampaignCard campaign={campaign} />
               </Grid>
             ))}
           </Grid>

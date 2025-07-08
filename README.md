@@ -25,6 +25,77 @@ NobleDeeds makes it easy to support causes you care about:
 
 ---
 
+## 📂 Folder Structure
+```
+NobleDeeds/
+├── backend/
+│   ├── controllers/
+│   │   ├── AuthController.js
+│   │   └── CampaignController.js
+│   ├── middlewares/
+│   │   └── AuthMiddleware.js
+│   ├── models/
+│   │   ├── campaigns.js
+│   │   └── users.js
+│   ├── routes/
+│   │   ├── AuthRoute.js
+│   │   └── CampaignRoutes.js
+│   ├── utils/
+│   │   └── SecretToken.js
+│   ├── .gitignore
+│   ├── app.js
+│   ├── cloudinary.js
+│   ├── package-lock.json
+│   └── package.json
+└── frontend/
+    ├── public/
+    │   ├── campaign_images/
+    │   └── images/
+    ├── src/
+    │   ├── components/
+    │   │   ├── CampaignCard.jsx
+    │   │   ├── Carousel.css
+    │   │   ├── Carousel.jsx
+    │   │   ├── Categories.css
+    │   │   ├── Categories.jsx
+    │   │   ├── Navbar.css
+    │   │   └── Navbar.jsx
+    │   ├── context/
+    │   │   └── AuthContext.jsx
+    │   ├── pages/
+    │   │   ├── Account.css
+    │   │   ├── Account.jsx
+    │   │   ├── AddCampaign.css
+    │   │   ├── AddCampaign.jsx
+    │   │   ├── CampaignDetails.css
+    │   │   ├── CampaignDetails.jsx
+    │   │   ├── Donation.jsx
+    │   │   ├── EditCampaign.css
+    │   │   ├── EditCampaign.jsx
+    │   │   ├── Home.css
+    │   │   ├── Home.jsx
+    │   │   ├── Login.css
+    │   │   ├── Login.jsx
+    │   │   ├── NotFound.css
+    │   │   ├── NotFound.jsx
+    │   │   ├── SearchResults.css
+    │   │   ├── SearchResults.jsx
+    │   │   ├── Signup.css
+    │   │   └── Signup.jsx
+    │   ├── App.css
+    │   ├── App.jsx
+    │   ├── index.css
+    │   └── main.jsx
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    └── vite.config.js
+```
+---
+
 ## ✨ Key Features
 
 - 🎯 View and donate to active donation campaigns  

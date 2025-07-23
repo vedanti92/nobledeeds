@@ -110,3 +110,9 @@ NobleDeeds/
 
 - 🔗 [Visit NobleDeeds](https://nobledeeds.onrender.com/)  
 - 🚀 **Hosted on:** Render – reliable hosting for full-stack apps
+
+---
+
+## 📸 Screenshots
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/1c52c806-8d97-4b54-b202-33350a14fde5" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/b87f2e7c-cea9-496b-b84e-2cfe85b95051" />
